@@ -1,9 +1,11 @@
-import Category from "./Category";
+import Banner from "./CarouselBanner";
+import HotSaleProduct from "./HotSaleProducts";
 import OutStandingProduct from "./OutStandingProduct";
 function HomePage() {
     return(
         <>
-            <Category/>
+            <Banner/> 
+            <HotSaleProduct/>
             <OutStandingProduct/>
         </>
     )

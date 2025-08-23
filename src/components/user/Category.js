@@ -1,5 +1,4 @@
 import "./indexUser.css";
-import {useState, useEffect} from 'react';
 import { IoIosPhonePortrait, IoIosArrowForward } from "react-icons/io";
 import { FaTabletAlt, FaLaptop  } from "react-icons/fa";
 import { TbDeviceAirpods } from "react-icons/tb";
@@ -8,19 +7,8 @@ import { MdScreenshotMonitor } from "react-icons/md";
 import { HiMiniComputerDesktop } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 function Category() {
-    
-    const imgs = ["./image/banner1.webp", "./image/banner2.webp", "./image/banner3.webp","./image/banner4.webp"];
-    const rigthBanner = ["./image/right-banner1.webp", "./image/right-banner2.webp", "./image/right-banner3.webp"]
-    const [currentIndex, setCurrentIndex] = useState(0);
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % imgs.length);
-      }, 4000);
-      return () => clearInterval(interval);
-    }, [imgs.length]);
     return(
     <>
-    <div className="container-category">
         <div className="category">
           <Link to="/phoneProduct" className="item-category">
             <IoIosPhonePortrait className="icon-item-category"/>
@@ -58,30 +46,6 @@ function Category() {
             <IoIosArrowForward className="icon-item-category"/>
           </Link>
         </div>
-        
-        <div className="slider-category">
-      {/* Tính toán offset dựa trên currentIndex */}
-      <div
-        className="banner-category"
-        style={{
-          transform: `translateX(${-currentIndex * 100}%)`,
-        }}
-      >
-        {imgs.map((img, index) => (
-          <img key={index} src={img} alt={`banner-${index}`} />
-        ))}
-      </div>
-    </div>
-    <div className="block-right-banner">
-      {rigthBanner.map((rigth, index)=>{
-        return (
-          <div className="right-banner" key={index}>
-          <img src={rigth} alt={rigth}/>
-        </div>
-        )
-      })}  
-    </div>
-    </div>
     </>
  )   
 }
