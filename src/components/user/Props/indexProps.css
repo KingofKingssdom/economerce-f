@@ -58,6 +58,7 @@
     color: black;
     font-weight: bold;
     font-size: 18px;
+    
 }
 .product-price {
     line-height: 10px;
@@ -78,8 +79,8 @@
 }
 .product-description {
     padding: 5px 5px;
-    background-color: rgb(243,244,246);
-    color: black;
+    background-color: rgb(239,233,254);
+    color: rgb(78,35,182);
     font-size: 13px;
     margin: 0 5px ;
     height: 68px;
@@ -87,4 +88,10 @@
     overflow: hidden;
     border-radius: 5px;
 }
-
+.product-detail-view {
+    font-size: 17px;
+    margin-left: 20px;
+    width: 120px;
+    background-color: rgb(239,233,254);
+    color: rgb(97,26,178);
+}

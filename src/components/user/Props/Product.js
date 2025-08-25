@@ -1,5 +1,8 @@
 import { useState } from "react"
 import "./indexProps.css"
+import { Link } from "react-router-dom"
+
+
 function Product(props) {
    const [change, setChange] = useState(false)
    const toggle = () =>{
@@ -7,7 +10,8 @@ function Product(props) {
    }
     return(
         <>
-        <div className="container-product-item"
+        <Link to={`${props.preLink}/${props.id}`}>
+            <div className="container-product-item"
             onMouseEnter={toggle}
             onMouseLeave={toggle}
             >
@@ -24,16 +28,24 @@ function Product(props) {
                     <img src={`${props.image}`} alt="Ảnh sản phẩm"/> 
                 </div>
                 <div className="product-title">
-                    <p>{props.title} </p>
+                    <p>{props.title}</p>
                 </div>
                 <div className="product-price">
-                    <p>{props.price}</p> 
-                    <p className="discount-price">{props.discount}</p>
+                    <p>
+                        { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
+                                props.price)}</p>
+                    <p 
+                    className="discount-price">
+                        { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
+                                props.discount)}
+                        </p>
                 </div>
                 <div className="product-description">
                     <p>{props.description}</p>
                 </div>
         </div>
+        </Link>
+        
         </>
     )
 }

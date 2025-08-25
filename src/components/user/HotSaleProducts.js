@@ -69,6 +69,7 @@ function HotSaleProduct () {
                         </div>  
                     </div>
                     <BoxProduct
+                        links = 'hotSale'
                         data = {dataProduct}
                     />
                 </div>

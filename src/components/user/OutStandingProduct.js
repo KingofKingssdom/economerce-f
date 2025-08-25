@@ -3,283 +3,272 @@ import "./indexUser.css"
 import Product from "./Props/Product";
 import axios from "axios"
 import {Link} from "react-router-dom"
+import BoxProduct from "./BoxProduct";
 function OutStandingProduct() {
-    const [phones, setPhones] = useState([]);
-    useEffect(()=>{
-        const fetchPhone = async () => {
-            try {
-                const response = await axios.get("http://localhost:8080/product/category?categoryId=1");
-                setPhones(response.data)
-            }
-            catch(error){
-            console.error("Lỗi gọi api sản phẩm theo danh mục điện thoại", error);
+    const dataPhone = [
+        {id: 1,
+         discountInfo : 'Giảm 10%',
+         percent: 'Trả góp 0%',
+         image: './image/phoneIphone13.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
+        },
+         {id: 2,
+         discountInfo : 'Giảm 12%',
+         percent: 'Trả góp 0%',
+         image: './image/phoneIphone16e128GB.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
+        },
+         {id: 3,
+         discountInfo : 'Giảm 15%',
+         percent: 'Trả góp 0%',
+         image: './image/phoneIphone16Promax.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
+        },
+         {id: 4,
+         discountInfo : 'Giảm 10%',
+         percent: 'Trả góp 0%',
+         image: './image/phoneIphone13.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
+        },
+        {id: 5,
+         discountInfo : 'Giảm 10%',
+         percent: 'Trả góp 0%',
+         image: './image/phoneIphone13.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
         }
-    }
-        fetchPhone();
-    },[])
-    const [tablets, setTablets] = useState([]);
-     useEffect(()=>{
-        const fetchTablet = async () =>{
-            try{
-                const response = await axios.get("http://localhost:8080/product/category?categoryId=2");
-                setTablets(response.data);
-            }
-            catch(error){
-                console.error("Lỗi gọi api sản phẩm theo danh mục tablet" ,error);
-            }
-        }
-        fetchTablet();
-     },[])
+    ];
 
-     const [laptops, setLaptops] = useState([]);
-     useEffect(()=> {
-        const fetchLaptop = async () =>{
-            try{
-                const response = await axios.get("http://localhost:8080/product/category?categoryId=3");
-                setLaptops(response.data); 
-            }
-            catch(error){
-                console.error("Lỗi gọi api sản phẩm theo danh mục laptop", error);
-            }
+     const dataTablet = [
+        {id: 1,
+         discountInfo : 'Giảm 10%',
+         percent: 'Trả góp 0%',
+         image: './image/ipadAir6M2.webp',
+         title: 'Tablet Air6M2 Hàng chĩnh ahngx apple',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
+        },
+         {id: 2,
+         discountInfo : 'Giảm 12%',
+         percent: 'Trả góp 0%',
+         image: './image/ipadAir7.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
+        },
+         {id: 3,
+         discountInfo : 'Giảm 15%',
+         percent: 'Trả góp 0%',
+         image: './image/phoneIphone16Promax.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
+        },
+         {id: 4,
+         discountInfo : 'Giảm 10%',
+         percent: 'Trả góp 0%',
+         image: './image/phoneIphone13.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
+        },
+        {id: 5,
+         discountInfo : 'Giảm 10%',
+         percent: 'Trả góp 0%',
+         image: './image/phoneIphone13.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên"   
         }
-        fetchLaptop();
-     },[])
+    ];
 
-     const [sounds, setSounds] = useState([]);
-     useEffect(()=>{
-        const fetchSound = async () =>{
-            try{
-                const response = await axios.get("http://localhost:8080/product/category?categoryId=4");
-                setSounds(response.data); 
-            }
-            catch(error){
-                console.error("Lỗi gọi api sản phẩm theo danh mục âm thanh", error);
-            }
-        }
-        fetchSound();
-     },[])
 
-     const [watchs, setWatchs] = useState([]);
-     useEffect(()=>{
-        const fetchWatch = async () =>{
-            try{
-                const response = await axios.get("http://localhost:8080/product/category?categoryId=5");
-                setWatchs(response.data); 
-            }
-            catch(error){
-                console.error("Lỗi gọi api sản phẩm theo danh mục đồng hồ", error);
-            }
-        }
-        fetchWatch();
-     },[])
+    // const [phones, setPhones] = useState([]);
+    // useEffect(()=>{
+    //     const fetchPhone = async () => {
+    //         try {
+    //             const response = await axios.get("http://localhost:8080/product/category?categoryId=1");
+    //             setPhones(response.data)
+    //         }
+    //         catch(error){
+    //         console.error("Lỗi gọi api sản phẩm theo danh mục điện thoại", error);
+    //     }
+    // }
+    //     fetchPhone();
+    // },[])
 
-     const [screens, setScreens] = useState([]);
-     useEffect(()=>{
-        const fetchScreen = async () =>{
-            try{
-                const response = await axios.get("http://localhost:8080/product/category?categoryId=6");
-                setScreens(response.data); 
-            }
-            catch(error){
-                console.error("Lỗi gọi api gọi sản phẩm theo danh mục màn hình", error);
-            }
-        }
-        fetchScreen();
-     },[])
+    // const [tablets, setTablets] = useState([]);
+    //  useEffect(()=>{
+    //     const fetchTablet = async () =>{
+    //         try{
+    //             const response = await axios.get("http://localhost:8080/product/category?categoryId=2");
+    //             setTablets(response.data);
+    //         }
+    //         catch(error){
+    //             console.error("Lỗi gọi api sản phẩm theo danh mục tablet" ,error);
+    //         }
+    //     }
+    //     fetchTablet();
+    //  },[])
 
-     const [tivis, setTivis] = useState([]);
-     useEffect(()=>{
-        const fetchTivi = async () =>{
-            try{
-                const response = await axios.get("http://localhost:8080/product/category?categoryId=7");
-                setTivis(response.data); 
-            }
-            catch(error){
-                console.error("Lỗi gọi api sản phẩm theo danh mục Tivi", error);
-            }
-        }
-        fetchTivi();
-     },[])
+    //  const [laptops, setLaptops] = useState([]);
+    //  useEffect(()=> {
+    //     const fetchLaptop = async () =>{
+    //         try{
+    //             const response = await axios.get("http://localhost:8080/product/category?categoryId=3");
+    //             setLaptops(response.data); 
+    //         }
+    //         catch(error){
+    //             console.error("Lỗi gọi api sản phẩm theo danh mục laptop", error);
+    //         }
+    //     }
+    //     fetchLaptop();
+    //  },[])
+
+    //  const [sounds, setSounds] = useState([]);
+    //  useEffect(()=>{
+    //     const fetchSound = async () =>{
+    //         try{
+    //             const response = await axios.get("http://localhost:8080/product/category?categoryId=4");
+    //             setSounds(response.data); 
+    //         }
+    //         catch(error){
+    //             console.error("Lỗi gọi api sản phẩm theo danh mục âm thanh", error);
+    //         }
+    //     }
+    //     fetchSound();
+    //  },[])
+
+    //  const [watchs, setWatchs] = useState([]);
+    //  useEffect(()=>{
+    //     const fetchWatch = async () =>{
+    //         try{
+    //             const response = await axios.get("http://localhost:8080/product/category?categoryId=5");
+    //             setWatchs(response.data); 
+    //         }
+    //         catch(error){
+    //             console.error("Lỗi gọi api sản phẩm theo danh mục đồng hồ", error);
+    //         }
+    //     }
+    //     fetchWatch();
+    //  },[])
+
+    //  const [screens, setScreens] = useState([]);
+    //  useEffect(()=>{
+    //     const fetchScreen = async () =>{
+    //         try{
+    //             const response = await axios.get("http://localhost:8080/product/category?categoryId=6");
+    //             setScreens(response.data); 
+    //         }
+    //         catch(error){
+    //             console.error("Lỗi gọi api gọi sản phẩm theo danh mục màn hình", error);
+    //         }
+    //     }
+    //     fetchScreen();
+    //  },[])
+
+    //  const [tivis, setTivis] = useState([]);
+    //  useEffect(()=>{
+    //     const fetchTivi = async () =>{
+    //         try{
+    //             const response = await axios.get("http://localhost:8080/product/category?categoryId=7");
+    //             setTivis(response.data); 
+    //         }
+    //         catch(error){
+    //             console.error("Lỗi gọi api sản phẩm theo danh mục Tivi", error);
+    //         }
+    //     }
+    //     fetchTivi();
+    //  },[])
     return(
         <>
             <div className="container-outStanding">
-                <h2>ĐIỆN THOẠI</h2>
-                <div className="item-product">
-                    {phones.slice(0,4).map(
-                    (phone)=>{
-                        return (
-                            <div className="box" key={phone.id}>
-                            <Link to={`/phoneDetail/${phone.id}`}>
-                            <Product 
-                            discountInfo = {phone.discountPercent}
-                            percent = {phone.installment}
-                            image= {phone.productImage}
-                            title ={phone.productName}
-                            price = { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                phone.priceCurrent)}
-                            discount={new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND" }).format(phone.pricePrevious)}
-                            description={phone.description}
-                            />
-                            </Link>
-                            </div>
-                            )
-                        
-                        }
-                    )}
+                <div className="title-outStanding">
                 </div>
+                <h3>SẢN PHẨM NỔI BẬT NHẤT</h3>
+                <div className="content-outStading">
+                    <div className="title-box-product">
+                    <h2>ĐIỆN THOẠI</h2>
+                    <Link to="/phoneProduct"><button>Xem tất cả</button></Link>
+                    </div>
+                <BoxProduct
+                    data = {dataPhone}
+                    links = "/phoneDetail"
+                />
+                <div className="title-box-product">
+                    <h2>MÁY TÍNH BẢNG</h2>
+                    <Link to="/tabletProduct"><button>Xem tất cả</button></Link>
+                    </div>
+                <BoxProduct
+                    data = {dataTablet}
+                    links = "/tabletDetail"
+                />
+                
+               <div className="title-box-product">
+                    <h2>TAI NGHE</h2>
+                    <Link to="/soundProduct"><button>Xem tất cả</button></Link>
+                    </div>
+                <BoxProduct
+                    data = {dataTablet}
+                    links = "/soundDetail"
+                />
+                
+                
+               <div className="title-box-product">
+                    <h2>LAPTOP</h2>
+                    <Link to="/laptopProduct"><button>Xem tất cả</button></Link>
+                    </div>
+                <BoxProduct
+                    data = {dataTablet}
+                    links = "/laptopDetail"
+                />
+               <div className="title-box-product">
+                    <h2>ĐỒNG HỒ</h2>
+                    <Link to="/watchProduct"><button>Xem tất cả</button></Link>
+                    </div>
+                <BoxProduct
+                    data = {dataTablet}
+                    links = "/watchDetail"
+                />
+               <div className="title-box-product">
+                    <h2>MÀN HÌNH</h2>
+                    <Link to="/screenProduct"><button>Xem tất cả</button></Link>
+                    </div>
+                <BoxProduct
+                    data = {dataTablet}
+                    links = "/sceenDetail"
+                />
 
-                <h2>MÁY TÍNH BẢNG</h2>
-                <div className="item-product">
-                    {tablets.slice(0,4).map(
-                    (tablet)=>{
-                        return (
-                            <div className="box" key={tablet.id}>
-                            <Link to ={`/tabletDetail/${tablet.id}`}>
-                                <Product 
-                            discountInfo = {tablet.discountPercent}
-                            percent = {tablet.installment}
-                            image= {tablet.productImage}
-                            title ={tablet.productName}
-                            price = { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                tablet.priceCurrent)}
-                            discount={new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND" }).format(tablet.pricePrevious)}
-                            description={tablet.description}
-                            />
-                                </Link>
-                            </div>
-                            )
-                        
-                        }
-                    )}
-                </div>
-
-                <h2>TAI NGHE</h2>
-                <div className="item-product">
-                    {sounds.slice(0,4).map(
-                    (sound)=>{
-                        return (   
-                            <div className="box" key={sound.id}>
-                            <Link to={`/soundDetail/${sound.id}`}>
-                                <Product 
-                            discountInfo = {sound.discountPercent}
-                            percent = {sound.installment}
-                            image= {sound.productImage}
-                            title ={sound.productName}
-                            price = { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                sound.priceCurrent)}
-                            discount={new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND" }).format(sound.pricePrevious)}
-                            description={sound.description}
-                            
-                            />
-                                </Link>
-                            </div>
-                            )
-                        
-                        }
-                    )}
-                </div>
-
-                <h2>LAPTOP</h2>
-                <div className="item-product">
-                    {laptops.slice(0,4).map(
-                    (laptop)=>{
-                        return (
-                            <div className="box" key={laptop.id}>
-                            <Link to={`/laptopDetail/${laptop.id}`}>
-                                <Product 
-                            discountInfo = {laptop.discountPercent}
-                            percent = {laptop.installment}
-                            image= {laptop.productImage}
-                            title ={laptop.productName}
-                            price = { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                laptop.priceCurrent)}
-                            discount={new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND" }).format(laptop.pricePrevious)}
-                            description={laptop.description}
-                            
-                            />
-                                </Link>
-                            </div>
-                            )
-                        
-                        }
-                    )}
-                </div>
-
-                <h2>ĐỒNG HỒ</h2>
-                <div className="item-product">
-                    {watchs.slice(0,4).map(
-                    (watch)=>{
-                        return (
-                            <div className="box"  key={watch.id}>
-                            <Link to={`/watchDetail/${watch.id}`}>
-                                <Product 
-                           discountInfo = {watch.discountPercent}
-                           percent = {watch.installment}
-                           image= {watch.productImage}
-                           title ={watch.productName}
-                           price = { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                               watch.priceCurrent)}
-                           discount={new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND" }).format(watch.pricePrevious)}
-                           description={watch.description}
-                            />
-                                </Link>
-                            </div>
-                            )
-                        
-                        }
-                    )}
-                </div>
-
-                <h2>MÀN HÌNH</h2>
-                <div className="item-product">
-                    {screens.slice(0,4).map(
-                    (screen)=>{
-                        return (
-                            <div className="box"  key={screen.id}>
-                            <Link to ={`/screenDetail/${screen.id}`}>
-                                <Product 
-                             discountInfo = {screen.discountPercent}
-                             percent = {screen.installment}
-                             image= {screen.productImage}
-                             title ={screen.productName}
-                             price = { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                 screen.priceCurrent)}
-                             discount={new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND" }).format(screen.pricePrevious)}
-                             description={screen.description}
-                            />
-                                </Link>
-                            </div>
-                            )
-                        
-                        }
-                    )}
-                </div>
-
-                <h2>TIVI</h2>
-                <div className="item-product">
-                    {tivis.slice(0,4).map(
-                    (tivi)=>{
-                        return (
-                            <div className="box" key={tivi.id}>
-                            <Link to = {`/tvDetail/${tivi.id}`}>
-                                <Product 
-                             discountInfo = {tivi.discountPercent}
-                             percent = {tivi.installment}
-                             image= {tivi.productImage}
-                             title ={tivi.productName}
-                             price = { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                 tivi.priceCurrent)}
-                             discount={new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND" }).format(tivi.pricePrevious)}
-                             description={tivi.description}
-                            />
-                                </Link>
-                            </div>
-                            )
-                        
-                        }
-                    )}
-                </div>
+                
+               <div className="title-box-product">
+                    <h2>TIVI</h2>
+                    <Link to="/tiviProduct"><button>Xem tất cả</button></Link>
+                    </div>
+                <BoxProduct
+                    data = {dataTablet}
+                    links = "/tiviDetail"
+                />
             </div>
+        </div>
 
             
         </>

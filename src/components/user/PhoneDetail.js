@@ -1,10 +1,44 @@
 import "./indexUser.css"
-import { IoStar } from "react-icons/io5";
+import { IoStar, IoChatboxEllipses, IoHardwareChip } from "react-icons/io5";
 import { FaCartPlus } from "react-icons/fa";
 import { useParams, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState} from 'react';
 import axios from "axios";
 function PhoneDetail() {
+    const datas = {
+        id: 1,
+         discountInfo : 'Giảm 10%',
+         percent: 'Trả góp 0%',
+         image: '/image/phoneIphone13.webp',
+         title: 'Iphone 13 promax',
+         price: 25000000,
+         discount: 30000000,
+         description: "Đang khuyến mãi dành cho giáo viên",
+         dataImage: [
+            { idImage: 1, url: "/image/item1.webp", titleItem: "Titan Đen"},
+            { idImage: 2, url: "/image/item2.webp", titleItem: "Titan Tự Nhiên"},
+            { idImage: 3, url: "/image/item3.webp", titleItem: "Titan Trắng"},
+         ],
+        versionProductDetail: [
+            {idVerson: 1, name:"1TB"},
+            {idVerson: 2, name:"512GB"},
+            {idVerson: 3, name:"256GB"},
+        ]
+        }; 
+    const indexInit = datas.versionProductDetail[0].idVerson;
+    const [indexCurrent, setIndexCurrent] = useState(indexInit);
+    const indexColor = datas.dataImage[0].idImage;
+    const [selectBoxColor, setSelectBoxColor] = useState(indexColor);
+
+    const [open, setOpen] = useState(false);
+        const openBoxSpecification = () =>{
+            setOpen(true);
+            document.body.style.overflow = "hidden";
+        }
+        const closeBoxSpecification = () =>{
+            setOpen(false);
+            document.body.style.overflow = "auto";
+        }
     const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [message, setMessage] = useState(false);
@@ -43,13 +77,13 @@ function PhoneDetail() {
     }
 };
     return(
-
+        
         <>  
         <div className="container-ProductDetail">
         {message && <div className="alert">Thêm sản phẩm thành công</div>}
             <div className="product-detail">
             <div className="container-title">
-            <h4>{product.productName}</h4>
+            <h4>{datas.title}</h4>
             <div>
             <IoStar className="icon-product-detail"/>
             <IoStar className="icon-product-detail"/>
@@ -58,13 +92,81 @@ function PhoneDetail() {
             <IoStar className="icon-product-detail"/>
             </div> 
             </div>
+             <div className="label-detail-product">
+                 <button><IoChatboxEllipses/>Hỏi đáp</button>  
+                 <button
+                 onClick={openBoxSpecification}
+                 ><IoHardwareChip/>Xem thông số</button> 
+             </div>
             <div className="wrapper-product">
                 <div className="container-productImage">
-                    <img src={`data:image/webp;base64,${product.productImage}`} alt={product.productName}/>
+                    <img src={datas.dataImage[selectBoxColor -1].url} alt={datas.title}/>
                 </div>
-                <div className="container-specification">
+                <div className="container-productDetail-right">
+                    <div className="content-price-productDetail">
+                        <p>Giá sản phẩm</p>
+                        <div>
+                            <span className="price-detail-product">
+                               { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
+                                datas.price)}     
+                            </span>
+                            <span className="discount-detail-product">
+                                { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
+                                datas.discount)}    
+                            </span>
+                        </div>
+                    </div>
+                    <div className="container-version-product-detail">
+                         Phiên bản
+                         <div className="content-version-product-detail">
+                            {datas.versionProductDetail.map((data)=>{
+                          return(
+                            <div key={data.idVerson} className={`box-version-product-detail ${indexCurrent === data.idVerson ? "selectBox" : " "}`}
+                            onClick={() =>{
+                                setIndexCurrent(data.idVerson)
+                            }}
+                            >
+                                {data.name}
+                            </div>  
+                          )})}
+                         </div>             
+                    </div> 
+                    <div className="container-version-product-detail">
+                          Màu sắc
+                         <div className="content-version-product-detail">
+                            {datas.dataImage.map((data)=>{
+                          return(
+                            <div key={data.idImage} className={`box-color-product-detail ${selectBoxColor === data.idImage ? "selectBoxColor" : " "}`}
+                            onClick={() =>{
+                                setSelectBoxColor(data.idImage);
+                            }}
+                            >
+                                <img src={data.url} alt="" className="img-color-product-item"/>
+                                    {data.titleItem}
+                                </div>
+                          )})}
+                        </div>             
+                      
+                                     
+                    </div>  
+                </div>
+               
+            </div>
+            <div className="btn-container-product">
+            <Link to={`/confirmInformation/${cartId}`}>
+                             <div className="btn-buy">Mua ngay</div>
+                             </Link> 
+                            <div className="btn-addCart"  onClick={ addToCart }>
+                                Thêm vào giỏ hàng <FaCartPlus />
+                            </div>
+            </div>
+             <div className={`${open ? "overlay" : ""}`}>
+                 <div className={`container-specification ${open ? "specification-show" : ""}`}>
                    <div className="specification-table-top">
                         <h4>THÔNG SỐ KĨ THUẬT</h4>
+                        <div className="btn-close-box-specification"
+                        onClick={closeBoxSpecification}
+                        >X</div>
                    </div>
                    <div className="specification-table-bottom">
                         <div className="table-bottom">
@@ -172,15 +274,11 @@ function PhoneDetail() {
                    </div>
                 </div>
             </div>
-            <div className="btn-container-product">
-            <Link to={`/confirmInformation/${cartId}`}>
-                             <div className="btn-buy">Mua ngay</div>
-                             </Link> 
-                            <div className="btn-addCart"  onClick={ addToCart }>
-                                Thêm vào giỏ hàng <FaCartPlus />
-                            </div>
             </div>
+            <div className="comment">
+                Bình luận
             </div>
+            
         </div>
         </>
     )
