@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./indexUser.css"
-import Product from "./Props/Product";
+import Product from "./common/Product";
 import axios from "axios"
 import {Link} from "react-router-dom"
 import BoxProduct from "./BoxProduct";

@@ -1,6 +1,6 @@
 import "./indexUser.css"
 import { useEffect, useState } from "react";
-import Product from "./Props/Product";
+import Product from "./common/Product";
 import { FaArrowDownShortWide, FaArrowDownWideShort } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import axios from "axios";

@@ -1,5 +1,5 @@
 import "./indexUser.css"
-import Product from "./Props/Product";
+import Product from "./common/Product";
 import { FaArrowDownShortWide, FaArrowDownWideShort } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import  {Link} from "react-router-dom"

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
-import Product from "./Props/Product";
+import Product from "./common/Product";
 function BoxProduct(props) {
     const datas = props.data;
 

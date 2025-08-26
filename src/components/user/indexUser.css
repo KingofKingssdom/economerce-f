@@ -726,6 +726,10 @@ li {
 .selectBoxColor {
     border-color: var(--primary-color);
 }
+.container-comment {
+    border: 1px solid red;
+    height: 500px;
+}
 /* Order */
 .container-order {
     margin: 100px 220px;
