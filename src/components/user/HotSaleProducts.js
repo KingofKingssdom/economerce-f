@@ -1,4 +1,4 @@
-import BoxProduct from "./BoxProduct";
+import ProductSlider from "./common/ProductSlider";
 
 function HotSaleProduct () {
     const dataProduct = [
@@ -68,7 +68,7 @@ function HotSaleProduct () {
                             Kết thúc sau <span className="day-sale">10 : 10 : 59</span>
                         </div>  
                     </div>
-                    <BoxProduct
+                    <ProductSlider
                         links = 'hotSale'
                         data = {dataProduct}
                     />

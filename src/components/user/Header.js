@@ -1,8 +1,10 @@
 import './indexUser.css'
 import { CiViewList } from "react-icons/ci";
-import { IoMdSearch, IoIosClose } from "react-icons/io";
-import { FaPhoneAlt, FaTruck, FaCartPlus, FaRegUser } from "react-icons/fa";
+import { IoMdSearch} from "react-icons/io";
+import {FaCartPlus, FaRegUser } from "react-icons/fa";
+import { MdOutlineLocalPhone } from "react-icons/md";
 import { AiOutlineCaretDown } from "react-icons/ai";
+import { LuTruck } from "react-icons/lu";
 import Category from "./Category.js"
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -57,11 +59,31 @@ function Header() {
     return (
         <>
             <div className="container-header">
-                 <div className="header-item-category" 
+                <div className='content-header-top'>
+                    <div className="content-header-child-top">
+                        <div className='header-item-call' onClick={handleCall}>
+                            <div className="btn-call">
+                                <MdOutlineLocalPhone className='icon call-icon'/>
+                                <p>Hotline: 1900 1234</p>
+                            </div>
+                        </div>
+                        <div className='tb-ship'>
+                            Miễn phí vận chuyển từ 500k
+                        </div>
+                    </div>
+                    
+                </div>
+                <div className='content-header-bottom'>
+                    <div className="content-header-child-bottom">
+                        <div className="logo">
+                            <Link to="/">
+                                <img src="./image/Logo.png" alt='Ảnh logo'/>
+                            </Link>
+                        </div>
+                        <div className="header-item-category" 
                             onMouseEnter={handleCategory}
-                            onMouseLeave={handleCategory}
-                            
-                    >
+                            onMouseLeave={handleCategory}      
+                        >
                                 <div className={`btn-category ${changeColorBtnCategory ? 'btn-category-change': ''}`}>
                                 <CiViewList className='i' /> 
                                 <p>Danh mục</p> 
@@ -73,44 +95,26 @@ function Header() {
                             <div className={`container-category ${showCategory ? 'show' : ''}`}> 
                                 <Category/> 
                             </div>
-                    </div>
-                <div className="content-header">
-                    <div className="logo">
-                        <Link to="/">
-                            <img src="./image/Logo.png" alt='Ảnh logo'/>
-                        </Link>
-                    </div> 
-                    
-                   
-
-                    <div className='header-item-search'>
-                            <IoMdSearch className='i'/>
-                            <input placeholder='Bạn muốn tìm gì hôm nay' />
-                            <IoIosClose className='i search-close' />
-                    </div>
-
-                    <div className='header-item-call' onClick={handleCall}>
-                        <div className="btn-call">
-                            <FaPhoneAlt className='i call-icon' />
-                            <p>Liên hệ</p>
+                        </div> 
+                        <div className='header-item-search'>
+                            <div className='search-left'>
+                                 <IoMdSearch className='icon-search'/>
+                            </div>
+                            <input placeholder='Bạn muốn tìm gì hôm nay ?' />
                         </div>
-                    </div>
-
-                    <div className='header-item-order' onClick={() => user ? navigate("/order") : navigate("/login")}>
-                        <div className="btn-order">
-                            <FaTruck className='i order-icon'/>
-                            <p>Tra cứu đơn hàng</p>
-                        </div>
-                    </div>
-
-                     <div className='header-item-cart'  onClick={() => user ? navigate("/cart") : navigate("/login")}>
-                        <div className="btn-cart">
-                            <FaCartPlus className='i'/>
-                            <p>Giỏ hàng</p>
-                            <span>{cartItems}</span>
-                        </div>
-                    </div>   
-                        {/* Thông tin user + Logout */}
+                        <div className='header-box-right'>
+                            <div className='header-item-order' onClick={() => user ? navigate("/order") : navigate("/login")}>
+                                <div className="btn-order">
+                                    <LuTruck className='order-icon'/>
+                                </div>
+                            </div>
+                            <div className='header-item-cart'  onClick={() => user ? navigate("/cart") : navigate("/login")}>
+                                <div className="btn-cart">
+                                    <FaCartPlus/>
+                                    <span>{cartItems}</span>
+                                </div>
+                            </div>
+                                {/* Thông tin user + Logout */}
                     <div className='header-item-username' onClick={() => setShowUserMenu(!showUserMenu)}>
                         <FaRegUser className='i' />
                         {user ? (
@@ -126,7 +130,26 @@ function Header() {
                         ) : (
                             <Link to="/login"><p className='login-p'>Đăng nhập</p></Link>
                         )}
+                        </div>
+                        </div>
+                        
+                        
                     </div>
+                </div>
+                 
+                <div className="content-header">
+                    
+                    
+                   
+
+                    
+
+                    
+
+                    
+
+                        
+                    
                         
                 </div>
             </div>

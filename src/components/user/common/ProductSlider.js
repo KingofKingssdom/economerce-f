@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoIosArrowForward, IoIosArrowBack  } from "react-icons/io";
-import Product from "./common/Product";
-function BoxProduct(props) {
+import Product from "./Product";
+function ProductSlider(props) {
     const datas = props.data;
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -65,4 +65,4 @@ function BoxProduct(props) {
         </>
     )
 }
-export default BoxProduct;
+export default ProductSlider;

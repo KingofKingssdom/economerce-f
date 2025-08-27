@@ -71,63 +71,7 @@ function PhoneProduct() {
     return (
         <>
             <div className="container-detail">
-            <div className="banner-detail">
-                <div className="banner">
-                <div id="carousel1" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                    <div className="carousel-item active" data-bs-interval="10000">
-                    <img src="./image/phoneBanner1.webp" className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item" data-bs-interval="2000">
-                    <img src="./imagephonepBanner2.webp" className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item">
-                    <img src="./image/phoneBanner3.webp" className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item">
-                    <img src="./image/phoneBanner4.webp" className="d-block w-100" alt="..."/>
-                    </div>
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
-                </div>
-                </div>
-
-                <div className="banner">
-                <div id="carousel2" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                    <div className="carousel-item active" data-bs-interval="10000">
-                    <img src="./image/phoneBanner5.webp" className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item" data-bs-interval="2000">
-                    <img src="./image/phoneBanner6.webp" className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item">
-                    <img src="./image/phoneBanner7.webp" className="d-block w-100" alt="..."/>
-                    </div>
-                    <div className="carousel-item">
-                    <img src="./image/phoneBanner8.webp" className="d-block w-100" alt="..."/>
-                    </div>
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carousel2" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
-                </div>
-                </div>
-                
-            </div>
-
+              <p className="name-product-detail">Điện thoại</p> 
                 {/* Chọn thương hiệu */}
                 <div className="brand-selection">
                     <h4>Chọn theo hãng</h4>

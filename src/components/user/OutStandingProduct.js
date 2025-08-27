@@ -3,7 +3,7 @@ import "./indexUser.css"
 import Product from "./common/Product";
 import axios from "axios"
 import {Link} from "react-router-dom"
-import BoxProduct from "./BoxProduct";
+import ProductSlider from "./common/ProductSlider";
 function OutStandingProduct() {
     const dataPhone = [
         {id: 1,
@@ -210,7 +210,7 @@ function OutStandingProduct() {
                     <h2>ĐIỆN THOẠI</h2>
                     <Link to="/phoneProduct"><button>Xem tất cả</button></Link>
                     </div>
-                <BoxProduct
+                <ProductSlider
                     data = {dataPhone}
                     links = "/phoneDetail"
                 />
@@ -218,7 +218,7 @@ function OutStandingProduct() {
                     <h2>MÁY TÍNH BẢNG</h2>
                     <Link to="/tabletProduct"><button>Xem tất cả</button></Link>
                     </div>
-                <BoxProduct
+                <ProductSlider
                     data = {dataTablet}
                     links = "/tabletDetail"
                 />
@@ -227,7 +227,7 @@ function OutStandingProduct() {
                     <h2>TAI NGHE</h2>
                     <Link to="/soundProduct"><button>Xem tất cả</button></Link>
                     </div>
-                <BoxProduct
+                <ProductSlider
                     data = {dataTablet}
                     links = "/soundDetail"
                 />
@@ -237,7 +237,7 @@ function OutStandingProduct() {
                     <h2>LAPTOP</h2>
                     <Link to="/laptopProduct"><button>Xem tất cả</button></Link>
                     </div>
-                <BoxProduct
+                <ProductSlider
                     data = {dataTablet}
                     links = "/laptopDetail"
                 />
@@ -245,7 +245,7 @@ function OutStandingProduct() {
                     <h2>ĐỒNG HỒ</h2>
                     <Link to="/watchProduct"><button>Xem tất cả</button></Link>
                     </div>
-                <BoxProduct
+                <ProductSlider
                     data = {dataTablet}
                     links = "/watchDetail"
                 />
@@ -253,7 +253,7 @@ function OutStandingProduct() {
                     <h2>MÀN HÌNH</h2>
                     <Link to="/screenProduct"><button>Xem tất cả</button></Link>
                     </div>
-                <BoxProduct
+                <ProductSlider
                     data = {dataTablet}
                     links = "/sceenDetail"
                 />
@@ -263,7 +263,7 @@ function OutStandingProduct() {
                     <h2>TIVI</h2>
                     <Link to="/tiviProduct"><button>Xem tất cả</button></Link>
                     </div>
-                <BoxProduct
+                <ProductSlider
                     data = {dataTablet}
                     links = "/tiviDetail"
                 />
