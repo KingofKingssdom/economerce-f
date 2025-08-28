@@ -85,7 +85,7 @@ function Header() {
                             onMouseLeave={handleCategory}      
                         >
                                 <div className={`btn-category ${changeColorBtnCategory ? 'btn-category-change': ''}`}>
-                                <CiViewList className='i' /> 
+                                <CiViewList className='icon-category' /> 
                                 <p>Danh mục</p> 
                                 <div className={`arow-category ${changeArow ? 'arow-chage-category': ''}`}>
                                 <AiOutlineCaretDown />
@@ -116,10 +116,10 @@ function Header() {
                             </div>
                                 {/* Thông tin user + Logout */}
                     <div className='header-item-username' onClick={() => setShowUserMenu(!showUserMenu)}>
-                        <FaRegUser className='i' />
+                        <FaRegUser className='icon-login' />
                         {user ? (
                             <>
-                                <p>{user.firstName}</p>
+                                <p className='name-user'>{user.firstName}</p>
                                 {showUserMenu && (
                                     <div className="user-dropdown">
     
@@ -130,27 +130,11 @@ function Header() {
                         ) : (
                             <Link to="/login"><p className='login-p'>Đăng nhập</p></Link>
                         )}
-                        </div>
+                    </div>
                         </div>
                         
                         
                     </div>
-                </div>
-                 
-                <div className="content-header">
-                    
-                    
-                   
-
-                    
-
-                    
-
-                    
-
-                        
-                    
-                        
                 </div>
             </div>
 
