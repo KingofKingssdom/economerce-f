@@ -1,61 +1,29 @@
 import ProductSlider from "./common/ProductSlider";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 function HotSaleProduct () {
-    const dataProduct = [
-        {id: 1,
-         discountInfo : 'Giảm 10%',
-         percent: 'Trả góp 0%',
-         image: './image/phoneIphone13.webp',
-         title: 'Iphone 13 promax',
-         price: 25000000,
-         discount: 30000000,
-         description: "Đang khuyến mãi dành cho giáo viên"   
-        },
-         {id: 2,
-         discountInfo : 'Giảm 12%',
-         percent: 'Trả góp 0%',
-         image: './image/phoneIphone16e128GB.webp',
-         title: 'Iphone 13 promax',
-         price: 25000000,
-         discount: 30000000,
-         description: "Đang khuyến mãi dành cho giáo viên"   
-        },
-         {id: 3,
-         discountInfo : 'Giảm 15%',
-         percent: 'Trả góp 0%',
-         image: './image/phoneIphone16Promax.webp',
-         title: 'Iphone 13 promax',
-         price: 25000000,
-         discount: 30000000,
-         description: "Đang khuyến mãi dành cho giáo viên"   
-        },
-         {id: 4,
-         discountInfo : 'Giảm 10%',
-         percent: 'Trả góp 0%',
-         image: './image/phoneIphone13.webp',
-         title: 'Iphone 13 promax',
-         price: 25000000,
-         discount: 30000000,
-         description: "Đang khuyến mãi dành cho giáo viên"   
-        },
-        {id: 4,
-         discountInfo : 'Giảm 10%',
-         percent: 'Trả góp 0%',
-         image: './image/phoneIphone13.webp',
-         title: 'Iphone 13 promax',
-         price: 25000000,
-         discount: 30000000,
-         description: "Đang khuyến mãi dành cho giáo viên"   
-        }
-    ]
+    const [dataProduct, setDataProduct] = useState([]);
+          useEffect(() => {
+        axios
+          .get("http://localhost:8080/api/product/search/featured?featured=true")
+          .then((response) => {
+            setDataProduct(response.data.data);
+          })
+          
+      }, []);
+    
     return (
         <>
            <div className="container-hotSale">
-                <div className="header-hotSale">
+              <div className="container-header-hotSale">
+                 <div className="header-hotSale">
                    <p>BẢNG TIN KHUYẾN MÃI</p> 
                 </div>
                 <div className="top-sale">
                 </div>
+              </div>
+               
+                
                 <div className="content-hotSale">
                     <div className="time-container-hotSale">
                         <div className="timer-left">

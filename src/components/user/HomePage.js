@@ -4,9 +4,10 @@ import OutStandingProduct from "./OutStandingProduct";
 function HomePage() {
     return(
         <>
-            <Banner/> 
-            <HotSaleProduct/>
-            <OutStandingProduct/>
+                 <Banner/> 
+                <HotSaleProduct/>      
+             <OutStandingProduct/>
+                
         </>
     )
 }

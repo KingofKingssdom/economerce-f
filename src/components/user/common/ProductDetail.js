@@ -2,14 +2,16 @@ import "../indexUser.css"
 import { IoStar, IoChatboxEllipses, IoHardwareChip } from "react-icons/io5";
 import { FaCartPlus } from "react-icons/fa";
 import { useParams, Link } from 'react-router-dom';
-import { useEffect, useState, useRef} from 'react';
+import { useState, useRef} from 'react';
 import axios from "axios";
 function ProductDetail (props) {
-    const indexInit = props.data.versionProductDetail[0].idVerson;
+    const indexInit = props.data.productVariants[0].id;
     const [indexCurrent, setIndexCurrent] = useState(indexInit);
-    const indexColor = props.data.dataImage[0].idImage;
+    const indexColor = props.data.productColors[0].id;
     const [selectBoxColor, setSelectBoxColor] = useState(indexColor);
 
+    const [priceChange, setPriceChange] = useState(props.data.productVariants[0].priceDiscount);
+    const [priceOrigin, setPriceOrigin] = useState(props.data.productVariants[0].priceOrigin);
     const [open, setOpen] = useState(false);
         const openBoxSpecification = () =>{
             setOpen(true);
@@ -48,27 +50,13 @@ function ProductDetail (props) {
 
   
     const { id } = useParams();
-  const [product, setProduct] = useState([]);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/product/${id}`);
-        setProduct(response.data);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      }
-    };
-    fetchProduct();
-     
-  }, [id]);
     return (
         <>
              <div className="container-ProductDetail">
         {message && <div className="alert">Thêm sản phẩm thành công</div>}
             <div className="product-detail">
             <div className="container-title">
-            <h4>{props.data.title}</h4>
+            <h4>{props.data.productName}</h4>
             <div>
             <IoStar className="icon-product-detail"/>
             <IoStar className="icon-product-detail"/>
@@ -87,33 +75,35 @@ function ProductDetail (props) {
              </div>
             <div className="wrapper-product">
                 <div className="container-productImage">
-                    <img src={props.data.dataImage[selectBoxColor -1].url} alt={props.data.title}/>
+                    <img src={props.data.productColors[selectBoxColor -1].urlPhoto} alt={props.data.productName}/>
                 </div>
                 <div className="container-productDetail-right">
                     <div className="content-price-productDetail">
                         <p>Giá sản phẩm</p>
                         <div>
                             <span className="price-detail-product">
-                               { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                props.data.price)}     
+                               { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" })
+                               .format(priceChange)}     
                             </span>
                             <span className="discount-detail-product">
-                                { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                props.data.discount)}    
+                                { new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" })
+                                .format(priceOrigin)}    
                             </span>
                         </div>
                     </div>
                     <div className="container-version-product-detail">
                          Phiên bản
                          <div className="content-version-product-detail">
-                            {props.data.versionProductDetail.map((data)=>{
+                            {props.data.productVariants.map((data)=>{
                           return(
-                            <div key={data.idVerson} className={`box-version-product-detail ${indexCurrent === data.idVerson ? "selectBox" : " "}`}
+                            <div key={data.id} className={`box-version-product-detail ${indexCurrent === data.id ? "selectBox" : " "}`}
                             onClick={() =>{
-                                setIndexCurrent(data.idVerson)
+                                setIndexCurrent(data.id);
+                                setPriceChange(data.priceDiscount);
+                                setPriceOrigin(data.priceOrigin);
                             }}
                             >
-                                {data.name}
+                                {data.storage}
                             </div>  
                           )})}
                          </div>             
@@ -121,15 +111,15 @@ function ProductDetail (props) {
                     <div className="container-version-product-detail">
                           Màu sắc
                          <div className="content-version-product-detail">
-                            {props.data.dataImage.map((data)=>{
+                            {props.data.productColors.map((data)=>{
                           return(
-                            <div key={data.idImage} className={`box-color-product-detail ${selectBoxColor === data.idImage ? "selectBoxColor" : " "}`}
+                            <div key={data.id} className={`box-color-product-detail ${selectBoxColor === data.id ? "selectBoxColor" : " "}`}
                             onClick={() =>{
-                                setSelectBoxColor(data.idImage);
+                                setSelectBoxColor(data.id);
                             }}
                             >
-                                <img src={data.url} alt="" className="img-color-product-item"/>
-                                    {data.titleItem}
+                                <img src={data.urlPhoto} alt="" className="img-color-product-item"/>
+                                    {data.titleVariant}
                                 </div>
                           )})}
                         </div>             
@@ -157,18 +147,18 @@ function ProductDetail (props) {
                    </div>
                    <div className="specification-table-bottom">
                         <div className="table-bottom">
-                            {props.data.specification.map((d)=>{
+                            {props.data.specifications.map((d)=>{
                                 return (
                                     <>
                                     <h6>{d.nameSpecification}</h6>
                                     <div className="table-detail">
-                                    { Object.entries(d.detail).map(([keys, value])=>{
+                                    { (d.specificationDetails).map((data2)=>{
                                         return (
                                             <table className="table table-striped">
                                                 <tbody>
                                                     <tr>
-                                                        <td className="td-title">{keys}</td>
-                                                        <td>{value}</td>
+                                                        <td className="td-title">{data2.labelSpecification}</td>
+                                                        <td>{data2.valueSpecification}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

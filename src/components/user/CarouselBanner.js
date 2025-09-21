@@ -25,16 +25,15 @@ function Banner () {
         }];
 
         const [currentIndex, setCurrentIndex] = useState(0);
-        const widthBox = 1020;
         const timer = useRef();
         function autoSlider(){
          timer.current = setInterval(()=>{
             setCurrentIndex((pre)=> {
-                if(pre >= (arrays.length -1)* widthBox) {
+                if(pre >= arrays.length -1) {
                     return 0;
                 }
                 else {
-                   return pre + widthBox
+                   return pre + 1
                 }
             }
                  );
@@ -51,7 +50,7 @@ function Banner () {
                     return 0
                 }
                 else {
-                    return pre - widthBox;
+                    return pre - 1;
                 }
            })
            resetInterval()
@@ -59,11 +58,11 @@ function Banner () {
 
         const changeRight = () =>{
             setCurrentIndex((pre)=>{
-                if(pre >= (arrays.length -1)*widthBox){
-                    return (arrays.length -1)*widthBox;
+                if(pre >= arrays.length -1){
+                    return (arrays.length -1);
                 }
                 else{
-                   return pre + widthBox;
+                   return pre + 1;
                 }
             })
             resetInterval();
@@ -76,7 +75,7 @@ function Banner () {
     return(
         <>
             <div className="container-slider">
-                <div className="slider" style={{transform: `translateX(${- currentIndex}px)`, transition: "ease 1s"}}>
+                <div className="slider" style={{transform: `translateX(-${currentIndex *100}%)`, transition: "ease 1s"}}>
                     {arrays.map((array) => {
                         return (
                         <img key={array.id} 
@@ -87,32 +86,34 @@ function Banner () {
                         
                     })}
                 </div>
-            </div>
-            <div className="btn-container">
-                <button className="btn-left"
-                onClick={changeLeft}
-                >
-                    <IoIosArrowBack />
-                </button>
-                <button className="btn-right"
-                    onClick={changeRight}
+                <div className="btn-container">
+                    <button className="btn-left"
+                    onClick={changeLeft}
                     >
-                    <IoIosArrowForward />
-                </button>
-            </div>
+                        <IoIosArrowBack />
+                    </button>
+                    <button className="btn-right"
+                        onClick={changeRight}
+                        >
+                        <IoIosArrowForward />
+                    </button>
+                </div>
             <div className="container-indicator">
                 {arrays.map((array, index)=>{
                     return (
-                        <div key={index} className={`indicator ${((index * widthBox) === currentIndex) ? "show-indicator": ""}`}
+                        <div key={index} className={`indicator ${(index  === currentIndex) ? "show-indicator": ""}`}
                         onClick={()=>{
                             console.log(index)
                             resetInterval()
-                            setCurrentIndex(index * widthBox)
+                            setCurrentIndex(index)
                         }}
                         ></div>
                     )
                 })}
+            </div> 
             </div>
+            
+            
         </>
         
     )

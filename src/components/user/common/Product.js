@@ -24,8 +24,7 @@ function Product(props) {
                     <p className="info-percent">{props.percent}</p>
                 </div>
                 <div className={`image-product ${change ? "scale-image" : ""}`}>
-                    {/* data:image/webp;base64, */}
-                    <img src={`${props.image}`} alt="Ảnh sản phẩm"/> 
+                    <img src={props.image} alt="Ảnh sản phẩm"/> 
                 </div>
                 <div className="product-title">
                     <p>{props.title}</p>
