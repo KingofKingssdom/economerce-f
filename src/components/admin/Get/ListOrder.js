@@ -1,4 +1,4 @@
-import "./indexAdmin.css";
+import "../indexAdmin.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -51,7 +51,8 @@ function ListOrder() {
                 setShowMessage(true);
                 setTimeout(() => {
                     setShowMessage(false);
-                }, 5000);}
+                }, 5000);
+            }
         } catch (error) {
             console.error("Lỗi cập nhật đơn hàng:", error);
             alert("Cập nhật thất bại!");
@@ -69,7 +70,7 @@ function ListOrder() {
                 <h1>Danh sách đơn hàng</h1>
                 {showMessage && <div className="notification-success">
                     <p>Cập nhập thành công!</p>
-                </div> }
+                </div>}
                 {/* Toggle Hiển thị đơn đã giao */}
                 <button
                     className="btn btn-info mb-3"
@@ -79,22 +80,22 @@ function ListOrder() {
                 </button>
 
                 <div className="limited">
-                {filteredOrders.length > 0 ? (
-                     filteredOrders.map((order) => (
-                    <table key={order.id} className="table table-light table-striped table-bordered table-hover list-orderTable">
-                        <thead >
-                            <tr>
-                                <th className="th-id">Mã đơn hàng</th>
-                                <th>Tên khách hàng</th>
-                                <th className="th-id">Số điện thoại</th>
-                                <th className="th-id">Địa chỉ</th>
-                                <th className="th-st">Trạng thái</th>
-                                <th>Mô tả</th>
-                                <th>Chi tiết đơn hàng</th>
-                                <th>Cập nhật</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    {filteredOrders.length > 0 ? (
+                        filteredOrders.map((order) => (
+                            <table key={order.id} className="table table-light table-striped table-bordered table-hover list-orderTable">
+                                <thead >
+                                    <tr>
+                                        <th className="th-id">Mã đơn hàng</th>
+                                        <th>Tên khách hàng</th>
+                                        <th className="th-id">Số điện thoại</th>
+                                        <th className="th-id">Địa chỉ</th>
+                                        <th className="th-st">Trạng thái</th>
+                                        <th>Mô tả</th>
+                                        <th>Chi tiết đơn hàng</th>
+                                        <th>Cập nhật</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
                                         <td>{order.id}</td>
                                         <td>{order.fullName}</td>
@@ -145,11 +146,11 @@ function ListOrder() {
                                             </button>
                                         </td>
                                     </tr>
-                                
-                            
-                        </tbody>
-                    </table>
-                   )) ) : (
+
+
+                                </tbody>
+                            </table>
+                        ))) : (
                         <p>Không có đơn hàng nào.</p>
                     )}
                 </div>

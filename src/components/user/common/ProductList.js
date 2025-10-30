@@ -3,12 +3,13 @@ import Product from "./Product";
 import { useState, useEffect } from "react";
 import axios from "axios";
 function ProductList(props) {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [brandId, setBrandId] = useState(0);
     const [filterBrand, setFilterBrand] = useState([]);
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/api/product/get/category/brand?categoryId=1&brandId=${brandId}`)
+            .get(`${API_BASE_URL}/product/get/category/brand?categoryId=1&brandId=${brandId}`)
             .then((response) => {
                 setFilterBrand(response.data.data.content);
 

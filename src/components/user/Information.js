@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 
 function Information() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const { id } = useParams();
     const location = useLocation();
 
@@ -25,7 +26,7 @@ function Information() {
         }
         const fetchCart = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/cart/${id}`);
+                const response = await axios.get(`${API_BASE_URL}/cart/${id}`);
                 setCart(response.data);
             } catch (error) {
                 console.error("Lỗi lấy giỏ hàng:", error);
@@ -54,7 +55,7 @@ function Information() {
     // Cập nhật amount và orderInfo
     useEffect(() => {
         if (totalPrice >= 5000 && totalPrice < 1_000_000_000) {
-            setAmount(Math.floor(totalPrice)); 
+            setAmount(Math.floor(totalPrice));
         } else {
             setAmount(5000);
         }
@@ -83,7 +84,7 @@ function Information() {
         }
 
         try {
-        
+
 
             // 1. Gửi API tạo đơn hàng
             const formData = new FormData();
@@ -96,7 +97,7 @@ function Information() {
             const orderResponse = await axios.post("http://localhost:8080/order/add", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                 
+
                 },
             });
 
@@ -106,13 +107,13 @@ function Information() {
 
             // 2. Gửi API thanh toán VNPay 
             const paymentFormData = new FormData();
-            paymentFormData.append("amount", amount * 100); 
+            paymentFormData.append("amount", amount * 100);
             paymentFormData.append("orderInfo", orderInfo);
 
             const vnpayResponse = await axios.post("http://localhost:8080/api/VNPay/submitOrder", paymentFormData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    
+
                 },
             });
 
@@ -131,7 +132,7 @@ function Information() {
     return (
         <div className="container-form">
             <div className="header-form">Vui lòng điền chính xác thông tin nhận hàng</div>
-            
+
             {paymentStatus && (
                 <div className={`payment-status ${paymentStatus === "Success" ? "success" : "failed"}`}>
                     {paymentStatus === "Success"

@@ -4,10 +4,11 @@ import axios from "axios"
 import { Link } from "react-router-dom"
 import ProductSlider from "./common/ProductSlider";
 function OutStandingProduct() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [productPhone, setProductPhone] = useState([]);
     useEffect(() => {
         axios
-            .get("http://localhost:8080/api/product/search/category?categoryId=1")
+            .get(`${API_BASE_URL}/product/search/category?categoryId=1`)
             .then((response) => {
                 setProductPhone(response.data.data.content);
             })

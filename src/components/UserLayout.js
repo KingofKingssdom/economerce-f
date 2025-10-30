@@ -1,12 +1,12 @@
 import Header from "./user/Header";
-import HeaderChild from "./user/HeaderChild";
 //import Footer from "./user/Footer";
 import { Outlet } from "react-router-dom";
 const UserLayout = () => {
     return (
         <>
+            <Header />
             <div className="bodyContainer">
-                <Header />
+
 
                 <div className="contentDemo1">
 
@@ -15,7 +15,6 @@ const UserLayout = () => {
 
                     <Outlet />
                     {/* <Footer /> */}
-                    <HeaderChild />
 
                 </div>
                 <div className="contentDemo3">

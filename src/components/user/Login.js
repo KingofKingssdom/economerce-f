@@ -1,98 +1,200 @@
 import { useState } from "react";
 import axios from "axios";
+import { CiUser, CiUnlock, CiMail } from "react-icons/ci";
+import { IoIosPhonePortrait } from "react-icons/io";
 import "./indexUser.css";
 import { useNavigate } from 'react-router-dom';
 function Login() {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
-  const [isRegister, setIsRegister] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
+    phoneNumber: "",
     email: "",
     password: ""
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const showBox = () => {
+    setCurrentIndex(() => 100)
+  }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = isRegister
-      ? "http://localhost:8080/user/add"
-      : "http://localhost:8080/user/login";
-
     try {
-      const response = await axios.post(url, formData, {
-        withCredentials: true, // Cho phép gửi session
+      const response = await axios.post(`${API_BASE_URL}/auth/register`, formData, {
         headers: { "Content-Type": "application/json" }
       });
-
-      alert(isRegister ? "Đăng ký thành công!" : "Đăng nhập thành công!");
-      if( !isRegister){
-         navigate('/');
-      }
-      localStorage.setItem("user", JSON.stringify(response.data)); 
+      alert("Đăng ký thành công!");
+      setFormData({
+        fullName: "",
+        phoneNumber: "",
+        email: "",
+        password: ""
+      });
+      setCurrentIndex(0)
     } catch (error) {
-      console.error(error);
+      console.error("Lỗi khi đăng ký:", error);
+      alert("Có lỗi xảy ra!");
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); // chặn reload trang
+    try {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, formData, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
+      });
+      alert("Đăng nhập thành công!");
+      setFormData({
+        fullName: "",
+        phoneNumber: "",
+        email: "",
+        password: ""
+      });
+      sessionStorage.setItem("user", JSON.stringify(response.data));
+
+      navigate("/", { state: { user: response.data } });
+    } catch (error) {
+      console.error("Lỗi khi đăng nhập:", error);
       alert("Có lỗi xảy ra!");
     }
   };
 
   return (
     <div className="conatainer-form">
+      <video id="background-video" autoPlay loop muted >
+        <source src="/image/backgroundLogin.mp4" type="video/mp4" />
+      </video>
+      <div className="image-form"
+        style={{
+          transform: `translateX(-${currentIndex}%)`,
+          transition: "ease 0.7s",
+        }}
+      >
+        <img src="/image/backgroundLog.png" />
+      </div>
       <div className="content-form">
-        <h2>
-          {isRegister ? "Đăng ký" : "Đăng nhập"}
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {isRegister && (
-            <div className="block">
-              <input 
-              type="text" 
-              name="lastName" 
-              placeholder="Họ" 
-              value={formData.lastName} 
-              onChange={handleChange} 
-              className="input-login" 
-              required />
-              <input 
-              type="text" 
-              name="firstName" 
-              placeholder="Tên" 
-              value={formData.firstName} 
-              onChange={handleChange} 
-              className="input-login" 
-              required />
+        <div className="container-login">
+          <h4 className="title">Đăng nhập</h4>
+          <form className="form-log">
+            <p className="title-fill">Số điện thoại</p>
+            <div className="fill-form">
+              <div>
+                <CiUser />
+              </div>
+              <input
+                type="text"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+              />
+
             </div>
-          )}
-          <div className="block">
-          <input 
-          type="email" 
-          name="email" 
-          placeholder="Email" 
-          value={formData.email} 
-          onChange={handleChange}  
-          className="input-login" required />
-          <input 
-          type="password" 
-          name="password" 
-          placeholder="Mật khẩu" 
-          value={formData.password} 
-          onChange={handleChange}  
-          className="input-login" required />
+            <p className="title-fill">Mật khẩu</p>
+            <div className="fill-form">
+
+              <div>
+                <CiUnlock />
+              </div>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+
+            <button
+              className="btn-login"
+              onClick={handleLogin}
+            >
+              Đăng nhập
+            </button>
+          </form>
+          <div className="choose-log">
+            <p>Bạn chưa có tài khoản ?</p>
+            <div className="toggle-log"
+              onClick={showBox}
+            > Đăng kí</div>
           </div>
-          
-          <button type="submit" className="btn btn-danger logbtn">
-            {isRegister ? "Đăng ký" : "Đăng nhập"}
-          </button>
-        </form>
-        <p className="">
-          {isRegister ? "Đã có tài khoản?" : "Chưa có tài khoản?"}{" "}
-          <button onClick={() => setIsRegister(!isRegister)} className="btn btn-danger">
-            {isRegister ? "Đăng nhập" : "Đăng ký"}
-          </button>
-        </p>
+
+        </div>
+
+
+        <div className="container-register">
+          <h4 className="title">Đăng kí tài khoản</h4>
+          <form className="form-log">
+            <p className="title-fill">Họ và tên</p>
+            <div className="fill-form">
+              <div>
+                <CiUser />
+              </div>
+              <input
+                type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+              />
+
+            </div>
+            <p className="title-fill">Số điện thoại</p>
+            <div className="fill-form">
+              <div>
+                <IoIosPhonePortrait />
+              </div>
+              <input
+                type="text"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+              />
+
+            </div>
+            <p className="title-fill">Email</p>
+            <div className="fill-form">
+              <div>
+                < CiMail />
+              </div>
+              <input
+                type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+
+            </div>
+            <p className="title-fill">Mật khẩu</p>
+            <div className="fill-form">
+
+              <div>
+                <CiUnlock />
+              </div>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+
+            <button
+              className="btn-login"
+              onClick={handleSubmit}
+            >
+              Đăng kí
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

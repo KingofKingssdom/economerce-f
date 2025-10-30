@@ -2,65 +2,63 @@ import "./indexUser.css"
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
-function OrderDetail () {
+function OrderDetail() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const { id } = useParams();
     const [orderDetails, setOrderDetails] = useState([]);
+
+    const fetchOrderItems = async () => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/orderItem/all?orderId=${id}`, { withCredentials: true });
+            setOrderDetails(response.data.data); // <-- lấy đúng field data
+        } catch (error) {
+            console.error("Lỗi gọi API lấy cách mặt hàng trong giỏ hàng:", error);
+        }
+    };
     useEffect(() => {
-        const fetchOrderDetail = async () => {
-            try {
-                const token = localStorage.getItem('token')
-                const response = await axios.get(`http://localhost:8080/orderItem/orderId?orderId=${id}`,{
-                    headers : {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                setOrderDetails(response.data);
-            } catch (error) {
-                console.error('Error fetching students:', error);
-            }
-        };
-
-        fetchOrderDetail();
-    }, [id]);
-    
-    return(
+        fetchOrderItems();
+    }, []);
+    return (
         <>
-        <div className="container-orderDetail">
-        <div className="content-orderDetail">
-            <h1>Chi tiết đơn hàng</h1>
-            <div className="limited">
-            <table class="table table-light table-striped table-bordered table-hover tb-d">
-            <thead>
-                        <tr>
-                            <th>Mã sản phẩm</th>
-                            <th className="th-nd">Tên sản phẩm</th>
-                            <th>Giá sản phẩm</th>
-                            <th>Ảnh sản phẩm</th>
-                            <th>Số lượng sản phẩm</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {orderDetails.map((orderDetail, index) => (
-                                <tr key={orderDetail.id || index}>
-                                    <td>{orderDetail.product.id}</td>
-                                    <td>{orderDetail.product.productName}</td>
-                                    <td>{ new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                 orderDetail.product.priceCurrent)}</td>
-                                    <td><img className="img-detail" src={`data:image/jpeg;base64,${orderDetail.product.productImage}`} alt="Ảnh nhãn hiệu"/></td>
-                                    <td>
-                                        {orderDetail.quantity}         
-                                    </td>
-                                </tr>
-                            ))}
+            <div className="container-order">
+                <div className="content-order">
+                    <h4 className="title">Chi tiết đơn hàng</h4>
+                    <div className="container-rep-order">
+                        {orderDetails.length > 0 ? (
+                            orderDetails.map((orderItem) => (
+                                <div className="container-order-product" key={orderItem.id}>
+                                    <div>
+                                    </div>
+                                    <div className="left-order-product">
+                                        <img src={orderItem.productColor.urlPhoto} alt={orderItem.productName} />
+                                    </div>
+                                    <div className="center-order-product">
+                                        <h6><b>Sản phẩm:</b> {orderItem.productName}</h6>
+                                        <p className="p-buy"></p>
+                                        <p><b>Số lượng:</b> {orderItem.quantity} </p>
+                                        <p><b>Đơn giá: </b>
+                                            {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
+                                                orderItem.priceBuy)}
+                                        </p>
+                                        <p><b>Phiên bản:</b> {orderItem.productVariant.storage}</p>
+                                        <p><b>Màu sắc:</b> {orderItem.productColor.titleVariant}</p>
+                                    </div>
+                                    <div>
+                                    </div>
+                                    <div>
+                                    </div>
+                                </div>
+                            ))) : (
+                            <p>Không có sản phẩm nào </p>
+                        )}
 
-                    </tbody>
-        </table>
+
+                    </div>
+
+                </div>
+
             </div>
-             
-        </div>
-        </div>
-        
-        
+
         </>
     )
 }

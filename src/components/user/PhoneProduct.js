@@ -6,11 +6,12 @@ import axios from "axios";
 import ProductList from "./common/ProductList";
 
 function PhoneProduct() {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const [d, setData] = useState(null);
   const [dataProduct, setDataProduct] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/brand/get/category?categoryId=1")
+      .get(`${API_BASE_URL}/brand/get/category?categoryId=1`)
       .then((response) => {
         setData(response.data.data);
       })
@@ -19,7 +20,7 @@ function PhoneProduct() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/product/search/category?categoryId=1")
+      .get(`${API_BASE_URL}/product/search/category?categoryId=1`)
       .then((response) => {
         setDataProduct(response.data.data.content);
       })
@@ -30,13 +31,10 @@ function PhoneProduct() {
     <>
       <div className="container-detail">
         <p className="name-product-detail">Điện thoại</p>
-        <div className="bg-phone-detail">
-          <ProductList
-            dataProductList={d}
-            dataProduct={dataProduct}
-          />
-        </div>
-
+        <ProductList
+          dataProductList={d}
+          dataProduct={dataProduct}
+        />
       </div>
     </>
   );
