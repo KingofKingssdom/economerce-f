@@ -3,38 +3,38 @@ import axios from 'axios';
 import { useState } from 'react';
 
 function AddCategory() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [categoryName, setCategoryName] = useState("");
     const [message, setMessage] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Reset thông báo trước đó
+        setMessage("");
         setErrorMessage("");
 
-        // Kiểm tra trường bắt buộc
+        // Kiểm tra các trường bắt buộc
         if (!categoryName) {
-            setErrorMessage("Vui lòng điền đầy đủ các trường bắt buộc.");
+            setErrorMessage("Vui lòng điền đầy đủ các thông tin.");
             return;
         }
 
+        const formData = new FormData();
+        formData.append("categoryName", categoryName);
 
-        const data = {
-            categoryName: categoryName
-        };
+
         try {
-            // const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:8080/category/add', data, {
+            const response = await axios.post(`${API_BASE_URL}/category/create`, formData, {
                 headers: {
-                    //'Authorization': `Bearer ${token}`,
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                 },
             });
             if (response.status === 200 || response.status === 201) {
-                setMessage(true);
-                setTimeout(() => {
-                    setMessage(false)
-                }, 5000)
-
+                setMessage(true)
+                setTimeout(() => { setMessage(false) }, 5000)
                 // Reset form
                 setCategoryName("");
 
@@ -43,6 +43,11 @@ function AddCategory() {
             }
         } catch (error) {
             console.error(error);
+            if (error.response && error.response.data && error.response.data.message) {
+                setErrorMessage("Có lỗi");
+            } else {
+                alert("Đã có lỗi xảy ra. Vui lòng kiểm tra lại dữ liệu.");
+            }
         }
     };
 
@@ -50,7 +55,7 @@ function AddCategory() {
         <div className='container-admin'>
             {/* <Sidebar/> */}
             <div className="content">
-                {message && <p className="notification-success">Thêm sản phẩm thành công</p>}
+                {message && <p className="notification-success">Thêm thành công</p>}
                 {errorMessage && <p className="notification-error">{errorMessage}</p>}
                 <div className="header-add">
                     <h1>Thêm Danh mục</h1>

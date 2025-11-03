@@ -2,17 +2,18 @@ import "../indexAdmin.css"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-
+import { GoPencil } from "react-icons/go";
 function ListBrand() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [brands, setBrands] = useState([]);
     const [filteredBrands, setFilteredBrands] = useState([]);
-    const [idBrandFilter, setIdBrandFilter] = useState("");
+    // const [idBrandFilter, setIdBrandFilter] = useState("");
     useEffect(() => {
         const fetchBrand = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/brand/getAll');
-                setBrands(response.data);
-                setFilteredBrands(response.data);
+                const response = await axios.get(`${API_BASE_URL}/brand/search/all`);
+                setBrands(response.data.data);
+                // setFilteredBrands(response.data);
             } catch (error) {
                 console.error('Error fetching students:', error);
             }
@@ -20,44 +21,44 @@ function ListBrand() {
 
         fetchBrand();
     }, []);
-    const handleFilter = async () => {
-        if (idBrandFilter.trim() === "") {
-            setFilteredBrands(brands);
-            return;
-        }
+    // const handleFilter = async () => {
+    //     if (idBrandFilter.trim() === "") {
+    //         setFilteredBrands(brands);
+    //         return;
+    //     }
 
-        try {
+    //     try {
 
-            const response = await axios.get(`http://localhost:8080/product/${idBrandFilter}`);
-            if (response.data) {
-                setFilteredBrands([response.data]);
-            }
-            else {
-                setFilteredBrands([]);
-            }
+    //         const response = await axios.get(`http://localhost:8080/product/${idBrandFilter}`);
+    //         if (response.data) {
+    //             setFilteredBrands([response.data]);
+    //         }
+    //         else {
+    //             setFilteredBrands([]);
+    //         }
 
-        } catch (error) {
-            console.error("Error filtering:", error);
-            setFilteredBrands([]);
-            alert("Không tìm thấy sản phẩm với mã này.");
-        }
-    };
+    //     } catch (error) {
+    //         console.error("Error filtering:", error);
+    //         setFilteredBrands([]);
+    //         alert("Không tìm thấy sản phẩm với mã này.");
+    //     }
+    // };
 
     return (
         <>
             <div className="container-admin">
                 <div className="content">
-                    <h1>Danh sách các nhãn hàng</h1>
+                    <h2>Nhãn hiệu</h2>
                     <div>
                         <input
                             type="text"
                             placeholder="Nhập mã sản phẩm..."
-                            value={idBrandFilter}
-                            onChange={(e) => setIdBrandFilter(e.target.value)}
+                        // value={idBrandFilter}
+                        // onChange={(e) => setIdBrandFilter(e.target.value)}
                         />
-                        <button className="btn btn-success" onClick={handleFilter}>Lọc</button>
+                        {/* <button className="btn btn-success" onClick={handleFilter}>Lọc</button> */}
                     </div>
-                    <div className="limited">
+                    <div className="box-containt-table list-brand">
                         <table class="table table-light table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -67,15 +68,17 @@ function ListBrand() {
                                     <th className="repair-table">Chỉnh sửa</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {filteredBrands.map((brand, index) => (
+                            <tbody className="tb-list-brand">
+                                {brands.map((brand, index) => (
                                     <tr key={brand.id || index}>
                                         <td>{brand.id}</td>
                                         <td>{brand.brandName}</td>
-                                        <td><img src={`data:image/webp;base64,${brand.imageBrand}`} alt="Ảnh nhãn hiệu" /></td>
+                                        <td><img src={brand.urlImageBrand} alt="Ảnh nhãn hiệu" /></td>
                                         <td>
                                             <Link to={`/admin/updateBrand/${brand.id}`}>
-                                                <button className="btn btn-warning">Cập nhập</button>
+                                                <button className="btn btn-warning">
+                                                    <GoPencil />
+                                                </button>
                                             </Link>
 
                                         </td>

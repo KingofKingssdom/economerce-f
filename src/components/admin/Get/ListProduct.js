@@ -74,8 +74,8 @@ function ListProduct() {
         <>
             <div className="container-admin">
                 <div className="content">
-                    <h1>Danh sách các sản phẩm</h1>
-                    <div>
+                    <h2>Danh sách các sản phẩm</h2>
+                    <div className="search-product">
                         <input
                             type="text"
                             placeholder="Nhập mã sản phẩm..."
@@ -84,7 +84,7 @@ function ListProduct() {
                         />
                         {/* <button onClick={handleFilter}>Lọc</button> */}
                     </div>
-                    <div className="limited">
+                    <div className="box-containt-table list-product">
                         <table className="table table-light table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -134,6 +134,7 @@ function ListProduct() {
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </>

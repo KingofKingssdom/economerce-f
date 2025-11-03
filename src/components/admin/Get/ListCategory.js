@@ -2,34 +2,32 @@ import "../indexAdmin.css"
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { GoPencil } from "react-icons/go";
 function ListCategory() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [categorys, setCategorys] = useState([]);
+
+    const fetchCategory = async () => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/category/search/all`);
+            setCategorys(response.data.data);
+            // setFilteredProducts(response.data.data);
+        } catch (error) {
+            console.error("Lỗi lấy toàn bộ sản phẩm :", error);
+        }
+    };
+
+    // Gọi API lấy danh sách sản phẩm khi component mount
     useEffect(() => {
-        const fetchCategory = async () => {
-            try {
-                const token = localStorage.getItem('token')
-                const response = await axios.get(`http://localhost:8080/category/getAll`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                setCategorys(response.data);
-            } catch (error) {
-                console.error("Lỗi khi lấy danh sách học sinh:", error);
-            }
-        };
         fetchCategory();
-    }, [])
-
-
-
+    }, []);
 
     return (
         <>
             <div className="container-admin">
                 <div className="content">
-                    <h1>Danh mục</h1>
-                    <div className="limited">
+                    <h2>Danh mục</h2>
+                    <div className="box-containt-table list-category">
                         <table class="table table-light table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -43,7 +41,12 @@ function ListCategory() {
                                     <tr key={category.id}>
                                         <td>{category.id}</td>
                                         <td>{category.categoryName}</td>
-                                        <td> <Link to={`/admin/updateCategory/${category.id}`}><button className="btn btn-warning">Cập nhập</button></Link></td>
+                                        <td>
+                                            <Link to={`/admin/updateCategory/${category.id}`}>
+                                                <button className="btn btn-warning">
+                                                    <GoPencil />
+                                                </button>
+                                            </Link></td>
 
                                     </tr>
                                 ))

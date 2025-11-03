@@ -4,79 +4,74 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 function UpdateCategory() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const { id } = useParams();
     const navigate = useNavigate();
-    const [category, setCategory] = useState("");
-    const [showMessage, setShowMessage] = useState(false);
-    useEffect(() => {
-        const fetchCategory = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/category/${id}`);
-                setCategory(response.data);
-            } catch (error) {
-                console.error("Error fetching student:", error);
-            }
-        };
+    const [categoryName, setCategoryName] = useState("");
+    const [message, setMessage] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
-        fetchCategory();
-    }, [id]);
 
-    const handleUpdate = async (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const data = {
-            categoryName: category
-        };
+        // Reset thông báo trước đó
+        setMessage("");
+        setErrorMessage("");
+
+        // Kiểm tra các trường bắt buộc
+        if (!categoryName) {
+            setErrorMessage("Vui lòng điền đầy đủ các thông tin.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("categoryName", categoryName);
+
 
         try {
-            const response = await axios.put(
-                `http://localhost:8080/category/update/${id}`, data,
-                {
-                    headers: {
-                        'Content-Type': "application/json",
-                    },
-                }
-            );
-
-            if (response.status === 200) {
-                setShowMessage(true);
-                setTimeout(() => {
-                    setShowMessage(false);
-                    navigate('/admin/listCategory');
-                }, 3000);
+            const response = await axios.put(`${API_BASE_URL}/category/update?categoryId=${id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            if (response.status === 200 || response.status === 201) {
+                setMessage(true)
+                setTimeout(() => { setMessage(false) }, 5000)
+                // Reset form
+                setCategoryName("");
             } else {
-
-                console.error('Update failed:', response);
-                alert('Cập nhật thất bại. Vui lòng thử lại.');
-
+                setErrorMessage("Đã có lỗi xảy ra. Vui lòng kiểm tra lại dữ liệu.");
             }
-
-
         } catch (error) {
-            console.error("Error updating student:", error);
-            alert('Cập nhật thất bại. Vui lòng kiểm tra lại dữ liệu.');
-
+            console.error(error);
+            if (error.response && error.response.data && error.response.data.message) {
+                setErrorMessage("Có lỗi");
+            } else {
+                alert("Đã có lỗi xảy ra. Vui lòng kiểm tra lại dữ liệu.");
+            }
         }
     };
     return (
         <>
             <div className='container-admin'>
                 <div className="content">
-                    {showMessage && <div className="notification-success">
+                    {message && <div className="notification-success">
                         <p>Cập nhập thành công!</p>
                     </div>}
                     <div className="header-add">
                         <h1>Cập nhập danh mục</h1>
                     </div>
                     <div className="form-container">
-                        <form onSubmit={handleUpdate}>
+                        <form onSubmit={handleSubmit}>
                             <div className="full-width">
-                                <label htmlFor="category">Tên danh muc:</label>
+                                <label htmlFor="categoryName">Tên danh muc:</label>
                                 <input type="text"
-                                    id="category"
-                                    name="category"
-                                    value={category}
-                                    onChange={(e) => setCategory(e.target.value)} />
+                                    id="categoryName"
+                                    name="categoryName"
+                                    value={categoryName}
+                                    onChange={(e) => setCategoryName(e.target.value)} />
                             </div>
                             <button type='submit' className='button-add' >Cập nhật</button>
                         </form>

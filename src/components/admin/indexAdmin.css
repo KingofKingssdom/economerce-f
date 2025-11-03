@@ -6,6 +6,7 @@
 
 .container-admin {
     display: flex;
+    width: 100%;
 }
 
 .content {
@@ -13,7 +14,51 @@
     box-sizing: border-box;
     max-height: 670px;
     overflow: hidden;
+    width: 100%;
+    text-align: center;
 }
+
+.content h2 {
+    font-family: Tahoma, sans-serif;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.search-product {
+    text-align: end;
+    margin-right: 100px;
+}
+
+.box-containt-table {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow-y: auto;
+    width: 100%;
+    margin-top: 10px;
+    max-height: 550px;
+}
+
+.list-product table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 15px;
+}
+
+.list-category table th {
+    background-color: #22668b;
+    color: white;
+    font-size: 15px;
+}
+
+.list-brand table th {
+    background-color: #981eb7;
+    color: white;
+    font-size: 15px;
+    position: sticky;
+    top: -1px;
+}
+
+
 
 /* Siderbar */
 body {
@@ -216,7 +261,7 @@ span i {
 
 /* ListCategory */
 .content table {
-    width: 1200px;
+    margin-bottom: 0;
 }
 
 .limited {
@@ -226,8 +271,62 @@ span i {
 }
 
 /* Product Detail */
-.DetailStudent-container {
-    display: flex;
+.detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+}
+
+.box-detail-container {
+    border-radius: 15px;
+    text-align: center;
+    overflow: hidden;
+    font-weight: bolder;
+    border: 1px solid black;
+    background-color: #FF8C00;
+
+}
+
+.box-detail-container h6 {
+    margin-top: 10px;
+    font-weight: 400;
+    color: var(--primary-color);
+    font-size: large;
+    font-family: Tahoma, sans-serif;
+}
+
+.content-box-detail {
+    max-height: 550px;
+    overflow: auto;
+    width: 100%;
+
+}
+
+.table-product {
+    max-width: 100%;
+}
+
+.table-product td {
+    font-weight: 100;
+}
+
+
+.table-product .col-table-product {
+    width: 10px;
+}
+
+.frame-image {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.frame-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .DetailStudent-container img {
