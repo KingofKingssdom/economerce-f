@@ -36,7 +36,7 @@ function ProductDetail() {
                         <div className="box-detail-container ">
                             <h6 >Màu sắc sản phẩm</h6>
                             <div className="content-box-detail">
-                                <table class="table table-light table-striped table-bordered table-hover table-product color-tablet-product">
+                                <table class="table table-light table-striped table-bordered table-hover table-product">
                                     <thead>
                                         <tr>
                                             <th >Màu sắc</th>

@@ -21,7 +21,6 @@ function ListProduct() {
         }
     };
 
-    // Gọi API lấy danh sách sản phẩm khi component mount
     useEffect(() => {
         fetchProduct();
     }, []);

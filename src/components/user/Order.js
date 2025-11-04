@@ -7,9 +7,9 @@ function Order() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [orders, setOrders] = useState([]);
     const [show, setShow] = useState(false);
-    const [selectedOrderId, setSelectedOrderId] = useState(null); // 🔹 Lưu id đơn hàng cần xóa
+    const [selectedOrderId, setSelectedOrderId] = useState(null);
 
-    // Lấy danh sách đơn hàng
+
     const fetchOrders = async () => {
         try {
             const response = await axios.get(`${API_BASE_URL}/order/all`, { withCredentials: true });
@@ -23,13 +23,13 @@ function Order() {
         fetchOrders();
     }, []);
 
-    // 🔹 Hàm click nút xóa (chỉ mở box xác nhận)
+
     const handleOpenConfirm = (id) => {
         setSelectedOrderId(id);
         setShow(true);
     };
 
-    // 🔹 Hàm gọi API xóa khi người dùng xác nhận
+
     const handleConfirmDelete = async () => {
         if (!selectedOrderId) return;
 
@@ -48,7 +48,7 @@ function Order() {
         }
     };
 
-    // 🔹 Đóng popup mà không xóa
+
     const handleClose = () => {
         setShow(false);
         setSelectedOrderId(null);
@@ -126,7 +126,6 @@ function Order() {
                 </div>
             </div>
 
-            {/* 🔹 Popup xác nhận xóa */}
             {show && (
                 <div className="table-confirm showBohover">
                     <div className="box-confirm showBox">

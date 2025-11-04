@@ -39,19 +39,23 @@
 }
 
 .list-product table th {
-    background-color: var(--primary-color);
+    background-color: #22668b;
     color: white;
     font-size: 15px;
+    position: sticky;
+    top: -1px;
 }
 
 .list-category table th {
     background-color: #22668b;
     color: white;
     font-size: 15px;
+    position: sticky;
+    top: -1px;
 }
 
 .list-brand table th {
-    background-color: #981eb7;
+    background-color: #22668b;
     color: white;
     font-size: 15px;
     position: sticky;
@@ -357,4 +361,79 @@ span i {
 
 .list-orderTable {
     min-width: 1200px;
+}
+
+/* Box xác nhận đơn hàng */
+.container-accept-common {
+    position: absolute;
+    left: 500px;
+}
+
+.conetainer-accept-common .show-box {
+    display: block;
+}
+
+.hidden-box {
+    display: none;
+}
+
+.container-select-accept {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 300px;
+    height: 100px;
+    overflow: hidden;
+    background-color: #cbd5e0;
+}
+
+.container-select-accept h5 {
+    color: white;
+
+}
+
+.content-select-accept {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.content-select-status {
+    background-color: #FF8C00;
+    color: white;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.content-select-status:hover {
+    background-color: #de7b02;
+    cursor: pointer;
+}
+
+.content-select-pay {
+    background-color: #00c2ed;
+    color: white;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.content-select-pay:hover {
+    background-color: #018ad3;
+    cursor: pointer;
+}
+
+.container-select-accept-status-order {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    background-color: #cbd5e0;
+    text-align: center;
+}
+
+.container-select-accept-status-order h5 {
+    background-color: #FF8C00;
+    color: white;
 }
