@@ -41,7 +41,6 @@ function Sidebar() {
     return (
         <>
             <div className="sidebar">
-                <h5>Quản trị viên</h5>
                 <ul>
                     <span><i><FaUser /></i> Đặng Huy </span>
                     <li><Link to="/adminPage"> <i><FaHome /></i> Trang chủ</Link> </li>

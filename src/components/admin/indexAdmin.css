@@ -71,12 +71,11 @@ body {
 
 .sidebar {
     width: 250px;
-    background: white;
-    color: black;
+    background: rgb(250, 233, 151);
+    color: rgb(88, 67, 22);
     box-sizing: border-box;
     display: inline-block;
     min-height: 695px;
-    box-shadow: 0 4px 35px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar h4,
@@ -94,7 +93,8 @@ h5 {
 
 a {
     text-decoration: none;
-    color: black;
+    color: rgb(88, 67, 22);
+    width: 100%;
 }
 
 li i {
@@ -108,16 +108,22 @@ span i {
 
 .sidebar ul li {
     padding: 10px 5px;
-    color: black;
+    color: rgb(88, 67, 22);
+    width: 100%;
 }
 
 .c-li {
-    width: 160px;
+    max-width: 100%;
+}
+
+li p {
+    width: 100%;
 }
 
 .sidebar li:hover {
     background: rgb(233, 48, 48);
     color: white;
+    background-color: rgb(222, 187, 10);
 }
 
 .sidebar li {
@@ -133,7 +139,6 @@ span i {
 .dropdown a:hover {
     background-color: white;
     color: rgb(34, 49, 58);
-    ;
 }
 
 .sidebar span {
@@ -366,7 +371,8 @@ span i {
 /* Box xác nhận đơn hàng */
 .container-accept-common {
     position: absolute;
-    left: 500px;
+    left: 600px;
+    top: 200px;
 }
 
 .conetainer-accept-common .show-box {
@@ -436,4 +442,19 @@ span i {
 .container-select-accept-status-order h5 {
     background-color: #FF8C00;
     color: white;
+}
+
+.container-box-seclect-order {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.show-box-select-order {
+    opacity: 1;
+    pointer-events: all;
 }

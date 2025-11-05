@@ -9,15 +9,12 @@ import UpdateOrder from "../Update/UpdateOrder";
 function ListOrder() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const [orders, setOrders] = useState([]);
-    const [showCompleted, setShowCompleted] = useState(false); // Toggle để hiển thị đơn đã giao
-    const [showMessage, setShowMessage] = useState(false);
     const [idOrder, setIdOrder] = useState(0);
-
+    const [toggle, setToggle] = useState(false);
     const fetchOrders = async () => {
         try {
             const response = await axios.get(`${API_BASE_URL}/order/search/all`);
             setOrders(response.data.data);
-            // setFilteredProducts(response.data.data);
         } catch (error) {
             console.error("Lỗi lấy toàn bộ sản phẩm :", error);
         }
@@ -27,44 +24,16 @@ function ListOrder() {
         fetchOrders();
     }, []);
 
-    // // Hàm cập nhật trạng thái đơn hàng
-    // const handleUpdateOrder = async (id, status, description) => {
-    //     try {
-    //         const token = localStorage.getItem("token");
-    //         const response = await axios.put(
-    //             `http://localhost:8080/order/update/status/${id}`,
-    //             null,
-    //             {
-    //                 params: { status, description },
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`,
-    //                 },
-    //             }
-    //         );
+    const handleAcceptOrder = (id) => {
+        setIdOrder(id);
+        setToggle(true)
 
-    //         // Cập nhật lại danh sách đơn hàng sau khi cập nhật
-    //         setOrders((prevOrders) =>
-    //             prevOrders.map((order) =>
-    //                 order.id === id ? { ...order, status, description } : order
-    //             )
-    //         );
+    }
+    const handleUpdateSuccess = () => {
+        fetchOrders();
+        setToggle(false);   // đóng box
+    };
 
-    //         if (response.status === 200) {
-    //             setShowMessage(true);
-    //             setTimeout(() => {
-    //                 setShowMessage(false);
-    //             }, 5000);
-    //         }
-    //     } catch (error) {
-    //         console.error("Lỗi cập nhật đơn hàng:", error);
-    //         alert("Cập nhật thất bại!");
-    //     }
-    // };
-
-    // Lọc đơn hàng theo trạng thái
-    // const filteredOrders = showCompleted
-    //     ? orders // Hiển thị tất cả nếu bật "Xem đơn đã giao"
-    //     : orders.filter((order) => order.status !== "ĐÃ GIAO HÀNG");
     const statusMap = {
         PENDING: { text: "Chờ xác nhận", color: "orange" },
         CONFIRMED: { text: "Đã xác nhận", color: "blue" },
@@ -80,17 +49,6 @@ function ListOrder() {
         <div className="container-admin">
             <div className="content">
                 <h2>Danh sách đơn hàng</h2>
-                {/* {showMessage && <div className="notification-success">
-                    <p>Cập nhập thành công!</p>
-                </div>} */}
-                {/* Toggle Hiển thị đơn đã giao */}
-                {/* <button
-                    className="btn btn-info mb-3"
-                    onClick={() => setShowCompleted(!showCompleted)}
-                >
-                    {showCompleted ? "Ẩn đơn hàng đã giao" : "Hiển thị đơn hàng đã giao"}
-                </button> */}
-
                 <div className="box-containt-table list-product">
                     <table className="table table-light table-striped table-bordered table-hover">
                         <thead>
@@ -141,7 +99,7 @@ function ListOrder() {
                                     </td>
                                     <td>
                                         <button className="btn btn-warning"
-                                            onClick={() => setIdOrder(order.id)}
+                                            onClick={() => { handleAcceptOrder(order.id) }}
                                         >
                                             <GoPencil />
 
@@ -161,9 +119,9 @@ function ListOrder() {
                 </div>
             </div>
 
-            <div>
+            <div className={`container-box-seclect-order ${toggle ? "show-box-select-order" : ""}`}>
                 {idOrder && (
-                    <UpdateOrder id={idOrder} onUpdateSuccess={fetchOrders} />
+                    <UpdateOrder id={idOrder} onUpdateSuccess={handleUpdateSuccess} />
                 )}
             </div>
         </div>
