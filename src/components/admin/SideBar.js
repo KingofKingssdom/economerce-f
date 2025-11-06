@@ -46,36 +46,36 @@ function Sidebar() {
                     <li><Link to="/adminPage"> <i><FaHome /></i> Trang chủ</Link> </li>
                     <li className='dropdown'>
                         <div className='' onClick={tonggleShow}><GiAutoRepair />Quản lý danh mục<MdOutlineKeyboardArrowDown /></div>
-                        {show && <ul>
-                            <li className='c-li'><Link to="/admin/addCategory">Thêm danh mục</Link> </li>
-                            <li className='c-li'><Link to="/admin/listCategory">Xem danh mục</Link> </li>
-                        </ul>}
+                        {show && <div>
+                            <Link to="/admin/addCategory"><div className='c-li'>Thêm danh mục</div></Link>
+                            <Link to="/admin/listCategory"><div className='c-li'>Xem danh mục</div></Link>
+                        </div>}
                     </li>
                     <li className='dropdown'>
                         <div onClick={tonggleSemester}>
                             <MdOutlineSubject /> Quản lý nhãn hiệu<MdOutlineKeyboardArrowDown />
                         </div>
-                        {semester && <ul>
-                            <li><Link to="/admin/addBrand">Thêm nhãn hiệu</Link></li>
-                            <li><Link to="/admin/listBrand">Xem nhãn hiện</Link></li>
-                        </ul>}
+                        {semester && <div>
+                            <Link to="/admin/addBrand"><div className='c-li'>Thêm nhãn hiệu</div></Link>
+                            <Link to="/admin/listBrand"><div className='c-li'>Xem nhãn hiệu</div></Link>
+                        </div>}
                     </li>
                     <li className='dropdown'>
                         <div className='' onClick={tonggleTable}><FaTable /> Quản lý sản phẩm <MdOutlineKeyboardArrowDown /></div>
-                        {table && <ul>
-                            <li className='c-li'> <Link to="/admin/addProduct">Thêm sản phẩm</Link> </li>
-                            <li className='c-li'> <Link to="/admin/addProductColor">Thêm màu sắc sản phẩm</Link> </li>
-                            <li className='c-li'> <Link to="/admin/addProductVariant">Thêm phiên bản sản phẩm</Link> </li>
-                            <li className='c-li'> <Link to="/admin/listProduct">Xem sản phẩm</Link> </li>
-                        </ul>}
+                        {table && <div>
+                            <Link to="/admin/addProduct"> <div className='c-li'>Thêm sản phẩm</div></Link>
+                            <Link to="/admin/addProductColor"> <div className='c-li'>Thêm màu sắc</div></Link>
+                            <Link to="/admin/addProductVariant"> <div className='c-li'>Thêm phiên bản</div></Link>
+                            <Link to="/admin/listProduct"> <div className='c-li'>Xem sản phẩm</div></Link>
+                        </div>}
                     </li>
 
                     <li className='dropdown'>
                         <div onClick={tonggleSubject}> <MdOutlineSubject /> Quản lý đơn hàng <MdOutlineKeyboardArrowDown /></div>
-                        {subject && <ul>
-                            <li><Link to="/admin/listOrder">Xem đơn hàng</Link></li>
+                        {subject && <div>
+                            <Link to="/admin/listOrder"> <div className='c-li'>Xem đơn hàng</div></Link>
 
-                        </ul>}
+                        </div>}
                     </li>
                     <span>Trao đổi</span>
                     <li><FaFacebookMessenger /> Tin nhắn</li>

@@ -120,8 +120,12 @@ function ListOrder() {
             </div>
 
             <div className={`container-box-seclect-order ${toggle ? "show-box-select-order" : ""}`}>
-                {idOrder && (
-                    <UpdateOrder id={idOrder} onUpdateSuccess={handleUpdateSuccess} />
+                {toggle && (
+                    <UpdateOrder
+                        id={idOrder}
+                        isOpen={toggle}
+                        onUpdateSuccess={handleUpdateSuccess}
+                    />
                 )}
             </div>
         </div>

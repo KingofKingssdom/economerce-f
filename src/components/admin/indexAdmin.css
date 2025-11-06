@@ -70,7 +70,7 @@ body {
 }
 
 .sidebar {
-    width: 250px;
+    min-width: 200px;
     background: rgb(250, 233, 151);
     color: rgb(88, 67, 22);
     box-sizing: border-box;
@@ -113,7 +113,14 @@ span i {
 }
 
 .c-li {
-    max-width: 100%;
+    max-width: 70%;
+    margin: 10px 20px;
+}
+
+.c-li:hover {
+    background-color: rgb(222, 211, 156);
+    color: white;
+
 }
 
 li p {
