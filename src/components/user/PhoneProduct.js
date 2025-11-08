@@ -20,7 +20,7 @@ function PhoneProduct() {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}/product/search/category?categoryId=1`)
+      .get(`${API_BASE_URL}/product/search/category?categoryId=1&pageNumber=0`)
       .then((response) => {
         setDataProduct(response.data.data.content);
       })
@@ -30,7 +30,7 @@ function PhoneProduct() {
   return (
     <>
       <div className="container-detail">
-        <p className="name-product-detail">Điện thoại</p>
+        <p className="name-product-detail"></p>
         <ProductList
           dataProductList={d}
           dataProduct={dataProduct}

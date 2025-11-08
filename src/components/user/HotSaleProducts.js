@@ -27,17 +27,7 @@ function HotSaleProduct() {
 
 
         <div className="content-hotSale">
-          <div className="time-container-hotSale">
-            <div className="timer-left">
-              Từ
-              <span className="day-sale">20 / 08</span>
-              Đến
-              <span className="day-sale">22 / 08</span>
-            </div>
-            <div className="timer-right">
-              Kết thúc sau <span className="day-sale">10 : 10 : 59</span>
-            </div>
-          </div>
+
           <ProductSlider
             getLink={(product) => {
               switch (product.categoryId) {

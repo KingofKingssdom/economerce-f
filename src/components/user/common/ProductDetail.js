@@ -6,6 +6,7 @@ import { useState, useRef } from 'react';
 import axios from "axios";
 function ProductDetail(props) {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
     const { id } = useParams();
     const navigate = useNavigate();
     const indexInit = props.data.productVariants[0].id;
@@ -135,7 +136,7 @@ function ProductDetail(props) {
                                                     setSelectBoxColor(data.id);
                                                 }}
                                             >
-                                                <img src={data.urlPhoto} alt="" className="img-color-product-item" />
+                                                <img src={`${IMAGE_BASE_URL}${data.urlPhoto}`} alt="" className="img-color-product-item" />
                                                 {data.titleVariant}
                                             </div>
                                         )

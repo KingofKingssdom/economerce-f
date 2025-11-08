@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 function Cart() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
     const [cartItems, setCartItems] = useState([]);
     const [checkedItems, setCheckedItems] = useState([]); // mảng lưu id đã check
     const [show, setShow] = useState(false);
@@ -87,7 +88,7 @@ function Cart() {
                                         />
                                     </div>
                                     <div className="left-order-product">
-                                        <img src={cartItem.productColor.urlPhoto} alt={cartItem.productName} />
+                                        <img src={`${IMAGE_BASE_URL}${cartItem.productColor.urlPhoto}`} alt={cartItem.productName} />
                                     </div>
                                     <div className="center-order-product">
                                         <h6><b>Sản phẩm:</b> {cartItem.productName}</h6>
@@ -129,13 +130,13 @@ function Cart() {
                                 {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(totalAmount)}
                             </p>
 
-                            <Link>
-                                <div className="btn-buy"
-                                    onClick={handleOrder}
-                                >
-                                    Mua ngay
-                                </div>
-                            </Link>
+
+                            <div className="btn-buy"
+                                onClick={handleOrder}
+                            >
+                                Mua ngay
+                            </div>
+
                         </div>
                     ) : ("")}
 

@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"
 
 
 function Product(props) {
-    const [change, setChange] = useState(false)
+    const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
+    const [change, setChange] = useState(false);
     const toggle = () => {
         setChange(pre => !pre)
     }
@@ -24,7 +25,7 @@ function Product(props) {
                         <p className="info-percent">{props.percent}</p>
                     </div>
                     <div className={`image-product ${change ? "scale-image" : ""}`}>
-                        <img src={props.image} alt="Ảnh sản phẩm" />
+                        <img src={`${IMAGE_BASE_URL}${props.image}`} alt="Ảnh sản phẩm" />
                     </div>
                     <div className="product-title">
                         <p>{props.title}</p>

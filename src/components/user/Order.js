@@ -72,7 +72,7 @@ function Order() {
                 <h4 className="title">Đơn hàng của bạn</h4>
                 <div className="container-rep-order">
                     {orders.length > 0 ? (
-                        <table className="table table-light table-striped table-bordered table-hover">
+                        <table className="table table-light table-striped table-bordered table-hover table-rep-product">
                             <thead>
                                 <tr>
                                     <th>Mã đơn hàng</th>

@@ -54,7 +54,6 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         withCredentials: true
       });
-      alert("Đăng nhập thành công!");
       setFormData({
         fullName: "",
         phoneNumber: "",

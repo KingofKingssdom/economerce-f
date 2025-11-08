@@ -175,16 +175,19 @@ a {
 
 .box-show-search {
     background-color: white;
-    height: 300px;
-    width: 30%;
+    height: 250px;
+    width: 29%;
     position: fixed;
-    z-index: 10;
-    left: 600px;
+    z-index: 100;
+    left: 645px;
+    top: 98px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     transition: 0.3s ease, transform 0.3s ease;
     opacity: 0;
     pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
 }
 
 .search-show {
@@ -580,11 +583,16 @@ li {
 .box-brand {
     width: 110px;
     height: 30px;
-    border: 1px solid black;
     overflow: hidden;
-    margin-right: 10px;
+    margin-right: 15px;
     padding: 3px 0;
     cursor: pointer;
+    box-shadow: 0 0 5px 2px rgb(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.box-brand:hover {
+    border: 1px solid var(--primary-color);
 }
 
 .item-brand img {
@@ -934,7 +942,6 @@ li {
     width: 100%;
     margin: 0 auto;
     height: 500px;
-    overflow-y: auto;
 }
 
 .container-order .title {
@@ -946,7 +953,17 @@ li {
 
 .container-rep-order {
     width: 100%;
-    overflow-y: scroll;
+    height: 550px;
+    overflow-y: auto;
+}
+
+.container-rep-order th {
+    background-color: #22668b;
+    color: white;
+    font-size: 15px;
+    position: sticky;
+    top: -1px;
+
 }
 
 .container-order-product {
@@ -1024,7 +1041,6 @@ li {
 
 .container-total {
     height: 60px;
-    min-width: 30%;
     background-color: white;
     box-shadow: 0 0 5px 5px rgb(215, 215, 215);
     border-radius: 5px;
@@ -1272,9 +1288,10 @@ td {
     margin: 90px auto;
     width: 80%;
     height: 400px;
-    border: 3px solid red;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 5px 5px rgb(0, 0, 0, 0.4);
+    border-radius: 5px;
 }
 
 .image-form {
@@ -1305,7 +1322,7 @@ td {
 .content-form {
     position: absolute;
     width: 100%;
-    border: 2px solid blue;
+
     width: 100%;
     height: 400px;
     display: grid;
@@ -1319,7 +1336,6 @@ td {
 .container-login,
 .container-register {
     width: 100%;
-    border: 1px solid green;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -1413,6 +1429,20 @@ td {
     background-image: linear-gradient(to right, rgb(254, 223, 220), rgb(191, 207, 252));
     border-radius: 30px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.show-search-text {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.search-results {
+    margin-top: 10px;
+}
+
+.search-results li {
+    width: 100%;
+    display: flex;
 }
 
 .container-header-hotSale {
@@ -1660,15 +1690,25 @@ td {
 }
 
 .container-paymethod {
-    width: 100%;
-    height: 300px;
+    width: 50%;
+    height: auto;
+    background-color: rgb(243, 246, 248);
+    margin: 0 auto;
+    border-radius: 10px;
+    padding-bottom: 1px;
 }
 
 .container-paymethod h3 {
     width: 100%;
     text-align: center;
     margin: 20px 0;
-    color: var(--primary-color);
+    color: white;
+    font-family: Tahoma, sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    background-color: rgb(250, 158, 0);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .pay-select-container {
@@ -1684,7 +1724,7 @@ td {
     height: 50px;
     overflow: hidden;
     border-radius: 5px;
-
+    box-shadow: 0 0 7px 2px rgb(0, 0, 0, 0.4);
 }
 
 .select-VNpay img {
@@ -1694,7 +1734,7 @@ td {
 }
 
 .select-other-pay {
-    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 7px 2px rgb(0, 0, 0, 0.4);
     border-radius: 5px;
     min-width: 100px;
     height: 50px;
@@ -1716,6 +1756,57 @@ td {
 
 .container-login-mobile {
     display: none;
+}
+
+/* Phần trang*/
+.container-page {
+    width: 280px;
+    height: 40px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.number-item {
+    display: flex;
+    border: 2px solid blue;
+    width: 200px;
+    overflow: hidden;
+}
+
+.slider-item {
+    display: flex;
+}
+
+.btn-page-right,
+.btn-page-left {
+    width: 40px;
+    height: 40px;
+    border: 1px solid grey;
+    cursor: pointer;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.page-item {
+    width: 40px;
+    height: 40px;
+    border: 1px solid grey;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.page-item:hover,
+.btn-page-right:hover,
+.btn-page-left:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.page-item.active {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 /* Tablet */
@@ -2038,9 +2129,9 @@ td {
         margin: 90px auto;
         width: 100%;
         height: 400px;
-        border: 3px solid red;
         position: relative;
         overflow: hidden;
+
     }
 
     .logo img {

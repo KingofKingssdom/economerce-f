@@ -24,7 +24,6 @@ function Header() {
     const [showUserMenu, setShowUserMenu] = useState(false);
 
 
-
     useEffect(() => {
         if (location.state?.user) {
             setUser(location.state.user);
@@ -209,17 +208,38 @@ function Header() {
             </div>
             <div className={`box-show-search ${showSearchBox ? 'search-show' : ''}`}>
 
-                {results.length > 0 && (
+                {results.length > 0 ? (
                     <ul className="search-results">
                         {results.map((item) => (
-                            <li key={item.id}>
-                                <img src={item.imageUrl} alt={item.name} width={40} />
-                                {item.productName}
-                            </li>
+                            < Link to={`${item.categoryId === 1
+                                ? "/phoneDetail"
+                                : item.categoryId === 2
+                                    ? "/laptop"
+                                    : item.categoryId === 3
+                                        ? "/watch"
+                                        : "/product"
+
+
+                                }/${item.id}`}
+                                onClick={closeBox}
+                            >
+                                <li key={item.id}>
+                                    <div style={{ width: '40px', height: '40px', marginRight: '10px', overflow: 'hidden' }}>
+                                        <img src={item.urlPhotoProduct} alt={item.name} style={{
+                                            objectFit: "cover", width: "100%", height: "100%"
+                                        }} />
+                                    </div>
+                                    <div style={{ fontWeight: "normal", fontSize: "15px" }}>
+                                        {item.productName}
+                                    </div>
+
+                                </li>
+                            </Link>
+
                         ))}
                     </ul>
-                )}
-            </div>
+                ) : (<div className='show-search-text'>Không có kết quả tìm kiếm</div>)}
+            </div >
 
         </>
     );

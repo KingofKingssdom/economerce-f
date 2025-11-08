@@ -8,7 +8,6 @@ function ProductSlider(props) {
   const [widthBox, setWidthBox] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(4);
   const BoxRef = useRef(null);
-  console.log(" Giá trị current ", BoxRef.current);
   useEffect(() => {
     const updateWidth = () => {
       if (BoxRef.current) {
@@ -39,7 +38,7 @@ function ProductSlider(props) {
     setCurrentIndex((prev) => {
       const next = prev + widthBox;
       if (next > maxOffset) {
-        return prev; // không cho cuộn nữa
+        return prev;
       }
       return next;
     });
@@ -78,7 +77,7 @@ function ProductSlider(props) {
         ))}
       </div>
 
-      {/* 🔹 Nút điều hướng */}
+      {/* Nút điều hướng */}
       <div className="container-button-slider-product">
 
         <button onClick={changeLeft} className="btn-left-product">

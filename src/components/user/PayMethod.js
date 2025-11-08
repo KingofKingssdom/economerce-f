@@ -61,7 +61,7 @@ function PayMethod() {
                     <div
                         className="select-other-pay"
                     >
-                        Khác
+                        Chưa hỗ trợ
                     </div>
                 </div>
             </div>

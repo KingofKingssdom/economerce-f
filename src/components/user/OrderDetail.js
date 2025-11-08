@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useParams } from "react-router-dom";
 function OrderDetail() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
     const { id } = useParams();
     const [orderDetails, setOrderDetails] = useState([]);
 
@@ -30,7 +31,7 @@ function OrderDetail() {
                                     <div>
                                     </div>
                                     <div className="left-order-product">
-                                        <img src={orderItem.productColor.urlPhoto} alt={orderItem.productName} />
+                                        <img src={`${IMAGE_BASE_URL}${orderItem.productColor.urlPhoto}`} alt={orderItem.productName} />
                                     </div>
                                     <div className="center-order-product">
                                         <h6><b>Sản phẩm:</b> {orderItem.productName}</h6>
