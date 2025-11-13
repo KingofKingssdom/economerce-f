@@ -43,7 +43,7 @@ function Sidebar() {
             <div className="sidebar">
                 <ul>
                     <span><i><FaUser /></i> Đặng Huy </span>
-                    <li><Link to="/adminPage"> <i><FaHome /></i> Trang chủ</Link> </li>
+                    <li><Link to="/admin/home"> <i><FaHome /></i> Trang chủ</Link> </li>
                     <li className='dropdown'>
                         <div className='' onClick={tonggleShow}><GiAutoRepair />Quản lý danh mục<MdOutlineKeyboardArrowDown /></div>
                         {show && <div>

@@ -465,3 +465,25 @@ li p {
     opacity: 1;
     pointer-events: all;
 }
+
+.container-line-chart {
+    width: 60%;
+    overflow: hidden;
+    padding: 50px 0;
+    margin-left: 20%;
+}
+
+.chart h3 {
+    font-family: Tahoma, sans-serif;
+    color: var(--primary-color);
+    margin: 20px auto;
+}
+
+.container-table-order {
+    margin-top: 60px;
+}
+
+.container-home-admin {
+    overflow-y: auto;
+    height: 650px;
+}

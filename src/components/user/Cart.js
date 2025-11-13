@@ -71,6 +71,16 @@ function Cart() {
         setShow(false)
     }
 
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`${API_BASE_URL}/cartItem/delete?cartItemId=${id}`, { withCredentials: true });
+            alert("Xóa sản phẩm thành công!");
+            await fetchCartItems();
+        } catch (error) {
+            console.error("Lỗi khi xóa sản phẩm:", error);
+            alert("Xóa thất bại!");
+        }
+    };
     return (
         <>
             <div className="container-order">
@@ -110,7 +120,9 @@ function Cart() {
                                     </div>
                                     <div className="rigth-order-product">
 
-                                        <div className="btn-delete">
+                                        <div className="btn-delete"
+                                            onClick={() => handleDelete(cartItem.id)}
+                                        >
                                             <MdDelete />
                                         </div>
                                     </div>
