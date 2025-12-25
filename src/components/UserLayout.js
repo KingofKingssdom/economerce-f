@@ -1,5 +1,5 @@
 import Header from "./user/Header";
-//import Footer from "./user/Footer";
+import Footer from "./user/Footer";
 import { Outlet } from "react-router-dom";
 const UserLayout = () => {
     return (
@@ -12,17 +12,14 @@ const UserLayout = () => {
 
                 </div>
                 <div className="contentDemo2">
-
                     <Outlet />
-                    {/* <Footer /> */}
-
                 </div>
                 <div className="contentDemo3">
 
                 </div>
 
             </div>
-
+            <Footer />
         </>
     );
 };

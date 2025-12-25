@@ -50,11 +50,13 @@ function Chart() {
     };
 
     return (
-        <div className="chart" style={{ width: "100%", height: 400 }}>
-            <h3 className="">
-                Biểu đồ số đơn hàng hoàn thành trong năm
+        <div className="chart" style={{ width: "100%", height: 250 }}>
+            <h3 className="" style={{ textAlign: "center" }}>
+                Phân tích doanh thu
             </h3>
-
+            <p className="" style={{ textAlign: "center" }}>
+                Trong năm
+            </p>
             <ResponsiveContainer>
                 <LineChart
                     data={chartData}

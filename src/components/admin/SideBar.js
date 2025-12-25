@@ -1,85 +1,186 @@
 import './indexAdmin.css'
-import React, { useEffect, useState } from 'react';
-import { FaUser, FaHome, FaTable, FaFacebookMessenger } from "react-icons/fa";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { GiAutoRepair } from "react-icons/gi";
+import { useState } from 'react';
+import { FaHome, FaFacebookMessenger, FaFileInvoiceDollar } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
+import { MdCategory, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineSubject } from "react-icons/md";
+import { IoMdAdd } from "react-icons/io";
+import { IoEyeSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 function Sidebar() {
-    const [account, setAccount] = useState(false);
-    const toggleAccount = () => {
-        setAccount(!account);
-    };
-
+    const [activeDropdown, setActiveDropdown] = useState(null);
     const [show, setShow] = useState(false);
     const tonggleShow = () => {
         setShow(!show)
     }
 
-    const [table, setTable] = useState(false);
-    const tonggleTable = () => {
-        setTable(!table);
+    const [product, setProduct] = useState(false);
+    const tongleProduct = () => {
+        setProduct(!product);
     }
 
-    const [subject, setSubject] = useState(false);
-    const tonggleSubject = () => {
-        setSubject(!subject);
+    const [order, setOrder] = useState(false);
+    const tongleOrder = () => {
+        setOrder(!order);
     }
 
-    const [semester, setSemester] = useState(false);
-    const tonggleSemester = () => {
-        setSemester(!semester);
+    const [brand, setBrand] = useState(false);
+    const tonggleBrand = () => {
+        setBrand(!brand);
     }
-    const [fullName, setFullName] = useState('');
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const payload = JSON.parse(decodeURIComponent(escape(atob(token.split('.')[1]))));
-            setFullName(payload.fullName);
-        }
-    }, []);
     return (
         <>
             <div className="sidebar">
-                <ul>
-                    <span><i><FaUser /></i> Đặng Huy </span>
-                    <li><Link to="/admin/home"> <i><FaHome /></i> Trang chủ</Link> </li>
-                    <li className='dropdown'>
-                        <div className='' onClick={tonggleShow}><GiAutoRepair />Quản lý danh mục<MdOutlineKeyboardArrowDown /></div>
-                        {show && <div>
-                            <Link to="/admin/addCategory"><div className='c-li'>Thêm danh mục</div></Link>
-                            <Link to="/admin/listCategory"><div className='c-li'>Xem danh mục</div></Link>
-                        </div>}
-                    </li>
-                    <li className='dropdown'>
-                        <div onClick={tonggleSemester}>
-                            <MdOutlineSubject /> Quản lý nhãn hiệu<MdOutlineKeyboardArrowDown />
+                <div className='sidebar-hearder'> <img src='/image/Logo.png' className='image-logo' alt='Logo' /> TechStore</div>
+                <div className='container-select-item'>
+                    <div className='select-item'>
+                        <div className='content-item'>
+                            <Link to="/admin/home"> <i><FaHome /></i> Trang chủ</Link>
                         </div>
-                        {semester && <div>
-                            <Link to="/admin/addBrand"><div className='c-li'>Thêm nhãn hiệu</div></Link>
-                            <Link to="/admin/listBrand"><div className='c-li'>Xem nhãn hiệu</div></Link>
-                        </div>}
-                    </li>
-                    <li className='dropdown'>
-                        <div className='' onClick={tonggleTable}><FaTable /> Quản lý sản phẩm <MdOutlineKeyboardArrowDown /></div>
-                        {table && <div>
-                            <Link to="/admin/addProduct"> <div className='c-li'>Thêm sản phẩm</div></Link>
-                            <Link to="/admin/addProductColor"> <div className='c-li'>Thêm màu sắc</div></Link>
-                            <Link to="/admin/addProductVariant"> <div className='c-li'>Thêm phiên bản</div></Link>
-                            <Link to="/admin/listProduct"> <div className='c-li'>Xem sản phẩm</div></Link>
-                        </div>}
-                    </li>
+                    </div>
+                    <div className={`dropdown ${activeDropdown === "category" ? "select-item-active" : ""}`}
+                    >
 
-                    <li className='dropdown'>
-                        <div onClick={tonggleSubject}> <MdOutlineSubject /> Quản lý đơn hàng <MdOutlineKeyboardArrowDown /></div>
-                        {subject && <div>
-                            <Link to="/admin/listOrder"> <div className='c-li'>Xem đơn hàng</div></Link>
+                        <div className='select-item'
+                            onClick={
+                                () => {
+                                    tonggleShow();
+                                    setActiveDropdown("category");
+                                }}>
+                            <div className='content-item'>
+                                <i><MdCategory /></i>Danh mục<MdOutlineKeyboardArrowDown />
+                            </div>
+                        </div>
+                        {show && <div className='item-select-child'>
+                            <Link to="/admin/addCategory" >
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoMdAdd /> Danh mục
+                                    </div>
+
+                                </div>
+                            </Link>
+                            <Link to="/admin/listCategory">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoEyeSharp /> Danh sách
+                                    </div>
+
+                                </div>
+                            </Link>
+                        </div>}
+                    </div>
+                    <div className={`dropdown ${activeDropdown === "brand" ? "select-item-active" : ""}`}>
+                        <div className='select-item'>
+                            <div className='content-item'
+                                onClick={
+                                    () => {
+                                        tonggleBrand();
+                                        setActiveDropdown("brand");
+                                    }}
+                            >
+                                <i><MdOutlineSubject /></i>  Nhãn hiệu<MdOutlineKeyboardArrowDown />
+                            </div>
+                        </div>
+                        {brand && <div className='item-select-child'>
+                            <Link to="/admin/addBrand">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoMdAdd /> Nhãn hiệu
+                                    </div>
+
+                                </div>
+
+                            </Link>
+                            <Link to="/admin/listBrand">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoEyeSharp /> Danh sách
+                                    </div>
+
+                                </div>
+                            </Link>
+                        </div>}
+                    </div>
+                    <div className={`dropdown ${activeDropdown === "product" ? "select-item-active" : ""}`}>
+                        <div className='select-item'
+                            onClick={
+                                () => {
+                                    tongleProduct();
+                                    setActiveDropdown("product");
+                                }}
+                        >
+                            <div className='content-item'>
+                                <i><AiFillProduct /></i>  Sản phẩm <MdOutlineKeyboardArrowDown />
+                            </div>
+
+                        </div>
+                        {product && <div className='item-select-child'>
+                            <Link to="/admin/addProduct">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoMdAdd /> Sản phẩm
+                                    </div>
+
+                                </div>
+                            </Link>
+                            <Link to="/admin/addProductColor">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoMdAdd /> Màu sắc
+                                    </div>
+
+                                </div>
+                            </Link>
+                            <Link to="/admin/addProductVariant">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoMdAdd /> Phiên bản
+                                    </div>
+
+                                </div>
+                            </Link>
+                            <Link to="/admin/listProduct">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoEyeSharp /> Danh sách
+                                    </div>
+
+                                </div>
+
+                            </Link>
+                        </div>}
+                    </div>
+
+                    <div className={`dropdown ${activeDropdown === "order" ? "select-item-active" : ""}`}
+                    >
+                        <div className='select-item'
+                            onClick={
+                                () => {
+                                    tongleOrder();
+                                    setActiveDropdown("order");
+                                }}
+                        >
+                            <div className='content-item'>
+                                <i><FaFileInvoiceDollar /></i>  Đơn hàng <MdOutlineKeyboardArrowDown />
+                            </div>
+
+                        </div>
+                        {order && <div className='item-select-child'>
+                            <Link to="/admin/listOrder">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoEyeSharp /> Đơn hàng
+                                    </div>
+
+                                </div>
+
+                            </Link>
 
                         </div>}
-                    </li>
-                    <span>Trao đổi</span>
-                    <li><FaFacebookMessenger /> Tin nhắn</li>
-                </ul>
+                    </div>
+                    <div><FaFacebookMessenger /> Tin nhắn</div>
+                </div>
             </div>
 
         </>

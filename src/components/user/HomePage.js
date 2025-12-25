@@ -1,9 +1,12 @@
 import Banner from "./CarouselBanner";
 import HotSaleProduct from "./HotSaleProducts";
 import OutStandingProduct from "./OutStandingProduct";
+import Buy from "./ExperienceBuy";
+import CategoryBox from "./CategoryBox";
 import AOS from "aos";
 import { useEffect } from "react";
 import "aos/dist/aos.css";
+import Footer from "./Footer";
 function HomePage() {
     useEffect(() => {
         AOS.init({
@@ -14,14 +17,19 @@ function HomePage() {
     return (
         <>
             <Banner />
+            <div>
+                <CategoryBox />
+            </div>
             <div data-aos="fade-down">
                 <HotSaleProduct />
             </div>
+
             <div data-aos="fade-right">
                 <OutStandingProduct />
             </div>
-
-
+            <div>
+                <Buy />
+            </div>
         </>
     )
 }

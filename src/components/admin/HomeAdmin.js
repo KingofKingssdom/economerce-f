@@ -1,13 +1,14 @@
-import Chart from "./Chart/Chart";
+
 import ListOrder from "./Get/ListOrder";
+import Summary from "./Summary";
+import SummaryAnalytic from "./SummaryAnalytic";
 import "./indexAdmin.css"
 function HomeAdmin() {
     return (
         <>
             <div className="container-home-admin">
-                <div className="container-line-chart">
-                    <Chart />
-                </div>
+                <Summary />
+                <SummaryAnalytic />
                 <div className="container-table-order">
                     <ListOrder />
                 </div>

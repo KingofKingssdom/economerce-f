@@ -31,10 +31,35 @@ function OutStandingProduct() {
                         <h2>ĐIỆN THOẠI</h2>
                         <Link to="/phoneProduct"><button>Xem tất cả</button></Link>
                     </div>
-                    <ProductSlider
-                        data={productPhone}
-                        links="/phoneDetail"
-                    />
+
+                    <div className="item-box-phone-noibat">
+                        <div className="box-banner-noibat">
+                            <img src='./image/BannerPhoneNoibat.jpg' alt="banner sản phẩm" />
+                        </div>
+                        <div className="box-product-noibat">
+                            <ProductSlider
+                                data={productPhone}
+                                links="/phoneDetail"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="title-box-product">
+                        <h2>TABLET</h2>
+                        <Link to="/phoneProduct"><button>Xem tất cả</button></Link>
+                    </div>
+
+                    <div className="item-box-tablet-noibat">
+                        <div className="box-banner-noibat">
+                            <img src='./image/BannerPhoneNoibat.jpg' alt="banner sản phẩm" />
+                        </div>
+                        <div className="box-product-noibat">
+                            <ProductSlider
+                                data={productPhone}
+                                links="/phoneDetail"
+                            />
+                        </div>
+                    </div>
                     {/* <div className="title-box-product">
                     <h2>MÁY TÍNH BẢNG</h2>
                     <Link to="/tabletProduct"><button>Xem tất cả</button></Link>
