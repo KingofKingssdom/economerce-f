@@ -510,8 +510,9 @@ span i {
 
 .container-home-admin {
     overflow-y: auto;
-    height: 650px;
+    min-height: 630px;
     background-color: rgb(241, 245, 248);
+    width: 1280px;
 }
 
 .header-sider {

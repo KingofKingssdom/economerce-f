@@ -1,5 +1,6 @@
 import "./indexAdmin.css"
 import Chart from "./Chart/Chart";
+import PieChar from "./Chart/PieChar";
 function SummaryAnalytic() {
     return (
         <>
@@ -8,7 +9,7 @@ function SummaryAnalytic() {
                     <Chart />
                 </div>
                 <div className="content-summary-analytic-right">
-                    Biểu đồ tròn
+                    <PieChar />
                 </div>
             </div>
         </>
