@@ -41,6 +41,8 @@ import Login from "./components/user/Login";
 import PayMethod from "./components/user/PayMethod";
 import AddProductColor from "./components/admin/Add/AddProductColor";
 import AddProductVariant from "./components/admin/Add/AddProductVariant";
+import LoginAdmin from "./components/admin/LoginAdmin";
+import AdminProtectedRoute from "./components/admin/AdminProtectedRoute";
 function App() {
     const [showButton, setShowButton] = useState(false);
 
@@ -95,7 +97,12 @@ function App() {
 
                     {/* Layout Admin */}
                     <Route path="/admin" element={<AdminLayout />}>
-                        <Route path="/admin/home" element={<HomeAdmin />} />
+                        <Route path="/admin/home" element={
+                            <AdminProtectedRoute>
+                                <HomeAdmin />
+                            </AdminProtectedRoute>
+
+                        } />
                         <Route path="/admin/addCategory" element={<AddCategory />} />
                         <Route path="/admin/listCategory" element={<ListCategory />} />
                         <Route path="/admin/updateCategory/:id" element={<UpdateCategory />} />
@@ -111,8 +118,8 @@ function App() {
                         <Route path="/admin/orderDetail/:id" element={<ListOrderDetail />} />
                         <Route path="/admin/addProductColor" element={<AddProductColor />} />
                         <Route path="/admin/addProductVariant" element={<AddProductVariant />} />
-
                     </Route>
+                    <Route path="/admin/login" element={<LoginAdmin />} />
                 </Routes>
             </Router>
 

@@ -628,3 +628,86 @@ span i {
     width: 29%;
     margin: 10px 0;
 }
+
+/* .container-login {
+    width: 50%;
+    height: 400px;
+    box-shadow: 0 0 10px 5px rgb(179, 177, 177);
+    background-color: white;
+    margin: 100px auto;
+    border-radius: 10px;
+} */
+.container-login-admin {
+    width: 70%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.container-login,
+.container-register {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.container-login .title,
+.container-register .title {
+    font-size: 22px;
+    width: fit-content;
+    margin: 20px auto;
+
+}
+
+.title-fill {
+    margin-bottom: 0;
+}
+
+.form-log {
+    width: 80%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.fill-form {
+    display: flex;
+    border-bottom: 1px solid white;
+    margin-bottom: 15px;
+}
+
+.fill-form input {
+    width: 60%;
+    color: wheat;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    margin-left: 4px;
+}
+
+.btn-login {
+    background-color: var(--primary-color);
+    width: 100%;
+    border: none;
+    color: white;
+    margin: 20px 0;
+}
+
+.btn-login:hover {
+    background-color: #B22222;
+}
+
+.choose-log {
+    width: 80%;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.toggle-log {
+    margin-left: 3px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.toggle-log:hover {
+    color: var(--primary-color);
+}

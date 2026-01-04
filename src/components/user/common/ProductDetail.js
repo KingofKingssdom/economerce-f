@@ -1,6 +1,8 @@
 import "../indexUser.css"
 import { IoStar, IoChatboxEllipses, IoHardwareChip } from "react-icons/io5";
-import { FaCartPlus } from "react-icons/fa";
+import { FaCartPlus, FaTruck } from "react-icons/fa";
+import { BsFillCheckCircleFill, BsXCircleFill, BsCalendar2CheckFill, BsShieldFillCheck } from "react-icons/bs";
+import { MdOutlineSwapHoriz } from "react-icons/md";
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import axios from "axios";
@@ -74,12 +76,13 @@ function ProductDetail(props) {
                 <div className="product-detail">
                     <div className="container-title">
                         <h4>{props.data.productName}</h4>
-                        <div>
+                        <div className="container-icon-product-detail">
                             <IoStar className="icon-product-detail" />
                             <IoStar className="icon-product-detail" />
                             <IoStar className="icon-product-detail" />
                             <IoStar className="icon-product-detail" />
                             <IoStar className="icon-product-detail" />
+                            <p> (245 đánh giá)</p>
                         </div>
                     </div>
                     <div className="label-detail-product">
@@ -96,30 +99,51 @@ function ProductDetail(props) {
                         </div>
                         <div className="container-productDetail-right">
                             <div className="content-price-productDetail">
-                                <p>Giá sản phẩm</p>
-                                <div>
-                                    <span className="price-detail-product">
-                                        {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" })
-                                            .format(priceChange)}
-                                    </span>
-                                    <span className="discount-detail-product">
-                                        {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" })
-                                            .format(priceOrigin)}
-                                    </span>
+                                <div className="content-price-left">
+                                    <p>Giá sản phẩm</p>
+                                    <div>
+                                        <span className="price-detail-product">
+                                            {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" })
+                                                .format(priceChange)}
+                                        </span>
+                                        <span className="discount-detail-product">
+                                            {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" })
+                                                .format(priceOrigin)}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="content-price-right">
+                                    {props.data.quantityProduct > 0 ? (
+                                        <span className="in-stock">
+                                            <BsFillCheckCircleFill className="icon-stick" /> Còn hàng
+                                        </span>
+                                    ) : (
+                                        <span className="out-stock">
+                                            <BsXCircleFill className="icon-x" /> Hết hàng
+                                        </span>
+                                    )}
+
+
+                                    <p>Giá sản phẩm đã bao gồm VAT</p>
                                 </div>
                             </div>
                             <div className="container-version-product-detail">
                                 Phiên bản
                                 <div className="content-version-product-detail">
+
                                     {props.data.productVariants.map((data) => {
                                         return (
                                             <div key={data.id} className={`box-version-product-detail ${indexCurrent === data.id ? "selectBox" : " "}`}
+
                                                 onClick={() => {
                                                     setIndexCurrent(data.id);
                                                     setPriceChange(data.priceDiscount);
                                                     setPriceOrigin(data.priceOrigin);
                                                 }}
                                             >
+
+
                                                 {data.storage}
                                             </div>
                                         )
@@ -136,7 +160,7 @@ function ProductDetail(props) {
                                                     setSelectBoxColor(data.id);
                                                 }}
                                             >
-                                                <img src={`${IMAGE_BASE_URL}${data.urlPhoto}`} alt="" className="img-color-product-item" />
+                                                <img src={`${data.urlPhoto}`} alt="" className="img-color-product-item" />
                                                 {data.titleVariant}
                                             </div>
                                         )
@@ -145,19 +169,63 @@ function ProductDetail(props) {
 
 
                             </div>
+                            <div className="container-description-product-detail">
+                                <div className="contaner-des-pro">
+                                    <BsCalendar2CheckFill className="icon-des" /><h6>Khuyến mãi ưu đãi</h6>
+                                </div>
+
+                                <p>{props.data.description}</p>
+                            </div>
+                            <div className="btn-container-product">
+
+                                <div className="btn-buy"
+                                    onClick={addToBuy}
+                                >
+                                    MUA NGAY
+                                    <p>Giao hàng tận nơi hoặc nhận tại cửa hàng</p>
+                                </div>
+
+                                <div className="btn-addCart" onClick={addToCart}>
+                                    <FaCartPlus />
+                                    <p>THÊM VÀO GIỎ</p>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
-                    <div className="btn-container-product">
+                    <div className="container-tb-product-detail">
+                        <div className="box-item-tb-protduct">
+                            <div className="b-icon-bh b-icon">
+                                <BsShieldFillCheck className="icon-bh bh-icon" />
+                            </div>
 
-                        <div className="btn-buy"
-                            onClick={addToBuy}
-                        >
-                            Mua ngay
+                            <div className="txt-tb-product">
+                                <h6>Bảo hành chính hãng</h6>
+                                <p>12 tháng tại trung tâm</p>
+                            </div>
+
                         </div>
+                        <div className="box-item-tb-protduct">
+                            <div className="b-icon-bh b-gh-icon">
+                                <FaTruck className="icon-bh gh-icon" />
+                            </div>
 
-                        <div className="btn-addCart" onClick={addToCart}>
-                            Thêm vào giỏ hàng <FaCartPlus />
+                            <div className="txt-tb-product">
+                                <h6>Giao hành miễn phí</h6>
+                                <p>Giao hàng nhanh trong 2h nội thành</p>
+                            </div>
+
+                        </div>
+                        <div className="box-item-tb-protduct">
+                            <div className="b-icon-bh b-sw-icon">
+                                <MdOutlineSwapHoriz className="icon-bh sw-icon" />
+                            </div>
+
+                            <div className="txt-tb-product">
+                                <h6>1 đổi 1 trong 30 ngày</h6>
+                                <p>Nếu có lỗi từ nhà sản xuất</p>
+                            </div>
+
                         </div>
                     </div>
                     <div className={`${open ? "overlay" : ""}`}>
