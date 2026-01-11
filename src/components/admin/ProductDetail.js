@@ -5,6 +5,7 @@ import axios from "axios";
 
 function ProductDetail() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
     const { id } = useParams(); // Lấy id từ URL
     const [product, setProduct] = useState(null);
 
@@ -50,7 +51,7 @@ function ProductDetail() {
                                                 <td>{productColor.titleVariant}</td>
                                                 <td>
                                                     <div className="frame-image">
-                                                        <img src={productColor.urlPhoto} alt="Ảnh nhãn hiệu"
+                                                        <img src={`${IMAGE_BASE_URL}${productColor.urlPhoto}`} alt="Ảnh nhãn hiệu"
                                                             style={{ "object-fit": "containt" }}
                                                         />
                                                     </div>

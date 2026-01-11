@@ -55,6 +55,7 @@ function ProductSlider(props) {
           display: "flex",
           transform: `translateX(-${currentIndex}px)`,
           transition: "transform 0.7s ease",
+
         }}
       >
         {datas.map((data, index) => (

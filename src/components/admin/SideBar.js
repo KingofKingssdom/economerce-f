@@ -1,6 +1,6 @@
 import './indexAdmin.css'
 import { useState } from 'react';
-import { FaHome, FaFacebookMessenger, FaFileInvoiceDollar } from "react-icons/fa";
+import { FaHome, FaFacebookMessenger, FaFileInvoiceDollar, FaRegListAlt } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
 import { MdCategory, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineSubject } from "react-icons/md";
@@ -27,6 +27,10 @@ function Sidebar() {
     const [brand, setBrand] = useState(false);
     const tonggleBrand = () => {
         setBrand(!brand);
+    }
+    const [specification, setSpecification] = useState(false);
+    const tonggleSpec = () => {
+        setSpecification(!specification)
     }
     return (
         <>
@@ -179,9 +183,53 @@ function Sidebar() {
 
                         </div>}
                     </div>
+                    <div className={`dropdown ${activeDropdown === "specification" ? "select-item-active" : ""}`}
+                    >
+                        <div className='select-item'
+                            onClick={
+                                () => {
+                                    tonggleSpec()
+                                    setActiveDropdown("specification");
+
+                                }}
+                        >
+
+                            <div className='content-item'>
+
+                                <i><FaRegListAlt /></i> Thông số<MdOutlineKeyboardArrowDown />
+
+                            </div>
+
+
+
+                        </div>
+                        {specification && <div className='item-select-child'>
+                            <Link to="/admin/addSpecification">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoMdAdd /> Loại thông số
+                                    </div>
+
+                                </div>
+
+                            </Link>
+                            <Link to="/admin/addSpecificationDetail">
+                                <div className='select-item-child'>
+                                    <div className='content-item'>
+                                        <IoMdAdd /> Chi tiết
+                                    </div>
+
+                                </div>
+
+                            </Link>
+
+
+                        </div>}
+
+                    </div>
                     <div><FaFacebookMessenger /> Tin nhắn</div>
                 </div>
-            </div>
+            </div >
 
         </>
     )

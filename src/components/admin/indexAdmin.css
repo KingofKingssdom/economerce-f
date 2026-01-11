@@ -534,7 +534,7 @@ span i {
     text-align: center;
     font-size: 17px;
     margin: 10px 20px;
-    border-left: 1px solid rgb(226, 232, 240);
+    border-left: 1px solid rgb(172, 176, 180);
 }
 
 .container-summary {
@@ -550,9 +550,10 @@ span i {
 .box-content-summary {
     height: auto;
     border-radius: 10px;
-    background-color: white;
+    background-image: linear-gradient(to right, rgb(108, 154, 218), rgb(140, 197, 222));
     box-shadow: 0 0 10px 4px rgb(0, 0, 0, 0.2);
     width: 250px;
+
 
 }
 
@@ -614,7 +615,7 @@ span i {
 }
 
 .content-summary-analytic-left {
-    background-color: white;
+    background-color: #e98d1d;
     margin: 10px 45px;
     border-radius: 10px;
     width: 60%;
@@ -623,7 +624,7 @@ span i {
 }
 
 .content-summary-analytic-right {
-    background-color: white;
+    background-color: rgb(199, 200, 205);
     border-radius: 10px;
     width: 29%;
     margin: 10px 0;

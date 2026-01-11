@@ -425,19 +425,33 @@ li {
 }
 
 .content-outStading {
-    background-image: linear-gradient(to right, rgb(158, 233, 227), rgb(252, 205, 173));
-    border-radius: 30px;
+    background-color: rgb(243, 244, 246);
+    border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
     position: relative;
     top: -50px;
     overflow: hidden;
 }
 
+.container-phone {
+    padding: 10px 0;
+    background-image: linear-gradient(to right, rgb(236, 203, 241), rgb(186, 226, 202));
+}
+
+.container-tablet {
+    margin-top: 40px;
+    padding: 10px 0;
+    background-image: linear-gradient(to right, rgb(186, 226, 235), rgb(221, 169, 203));
+}
+
 .title-box-product {
     margin: 20px 20px;
     display: flex;
-    width: 1000px;
-    justify-content: space-between;
+    width: 90%;
+}
+
+.btn-see-all {
+    margin-left: 30px;
 }
 
 .title-box-product h2 {
@@ -1557,7 +1571,7 @@ td {
 
 /*Hot Sale*/
 .container-hotSale {
-    width: 100%;
+    width: 98%;
     overflow: hidden;
     height: auto;
 }
@@ -1574,11 +1588,11 @@ td {
 
 .content-hotSale {
     width: 100%;
-    height: 500px;
+    height: 450px;
     position: relative;
     top: -64px;
     background-image: linear-gradient(to right, rgb(254, 223, 220), rgb(191, 207, 252));
-    border-radius: 30px;
+    border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
@@ -1648,6 +1662,7 @@ td {
     overflow: hidden;
     padding-top: 20px;
     background-color: none;
+
 }
 
 .content-outStading .item-box-phone-noibat {
@@ -1680,6 +1695,8 @@ td {
 
 .slider-box-product {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .container-button-slider-product {
@@ -2084,7 +2101,7 @@ td {
 }
 
 /* Tablet */
-@media (max-width: 991px) {
+@media (min-width: 768px) and (max-width:992px) {
     .bodyContainer {
         width: 100%;
         height: auto;

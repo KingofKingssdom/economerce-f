@@ -43,6 +43,8 @@ import AddProductColor from "./components/admin/Add/AddProductColor";
 import AddProductVariant from "./components/admin/Add/AddProductVariant";
 import LoginAdmin from "./components/admin/LoginAdmin";
 import AdminProtectedRoute from "./components/admin/AdminProtectedRoute";
+import AddSpecificationDetail from "./components/admin/Add/AddSpecificationDetail";
+import AddSpecification from "./components/admin/Add/AddSpecification";
 function App() {
     const [showButton, setShowButton] = useState(false);
 
@@ -118,6 +120,8 @@ function App() {
                         <Route path="/admin/orderDetail/:id" element={<ListOrderDetail />} />
                         <Route path="/admin/addProductColor" element={<AddProductColor />} />
                         <Route path="/admin/addProductVariant" element={<AddProductVariant />} />
+                        <Route path="/admin/addSpecification" element={<AddSpecification />} />
+                        <Route path="/admin/addSpecificationDetail" element={<AddSpecificationDetail />} />
                     </Route>
                     <Route path="/admin/login" element={<LoginAdmin />} />
                 </Routes>

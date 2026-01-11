@@ -5,6 +5,7 @@ import axios from 'axios';
 import { GoPencil } from "react-icons/go";
 function ListBrand() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
     const [brands, setBrands] = useState([]);
     const [filteredBrands, setFilteredBrands] = useState([]);
     // const [idBrandFilter, setIdBrandFilter] = useState("");
@@ -73,7 +74,7 @@ function ListBrand() {
                                     <tr key={brand.id || index}>
                                         <td>{brand.id}</td>
                                         <td>{brand.brandName}</td>
-                                        <td><img src={brand.urlImageBrand} alt="Ảnh nhãn hiệu" /></td>
+                                        <td><img src={`${IMAGE_BASE_URL}${brand.urlImageBrand}`} alt="Ảnh nhãn hiệu" /></td>
                                         <td>
                                             <Link to={`/admin/updateBrand/${brand.id}`}>
                                                 <button className="btn btn-warning">

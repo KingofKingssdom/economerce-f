@@ -27,39 +27,46 @@ function OutStandingProduct() {
 
 
                 <div className="content-outStading">
-                    <div className="title-box-product">
-                        <h2>ĐIỆN THOẠI</h2>
-                        <Link to="/phoneProduct"><button>Xem tất cả</button></Link>
+                    <div className="container-phone">
+                        <div className="title-box-product">
+                            <h2>ĐIỆN THOẠI</h2>
+                            <Link to="/phoneProduct"><button className="btn-see-all">Xem tất cả</button></Link>
+                        </div>
+                        <div className="item-box-phone-noibat">
+                            <div className="box-banner-noibat">
+                                <img src='./image/BannerPhoneNoibat.jpg' alt="banner sản phẩm" />
+                            </div>
+                            <div className="box-product-noibat">
+                                <ProductSlider
+                                    data={productPhone}
+                                    links="/phoneDetail"
+                                />
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="item-box-phone-noibat">
-                        <div className="box-banner-noibat">
-                            <img src='./image/BannerPhoneNoibat.jpg' alt="banner sản phẩm" />
+                    <div className="container-tablet">
+                        <div className="title-box-product">
+                            <h2>TABLET</h2>
+                            <Link to="/phoneProduct" ><button className="btn-see-all">Xem tất cả</button></Link>
                         </div>
-                        <div className="box-product-noibat">
-                            <ProductSlider
-                                data={productPhone}
-                                links="/phoneDetail"
-                            />
+                        <div className="item-box-tablet-noibat">
+                            <div className="box-banner-noibat">
+                                <img src='./image/BannerTabletNoibat.png' alt="banner sản phẩm" />
+                            </div>
+                            <div className="box-product-noibat">
+                                <ProductSlider
+                                    data={productPhone}
+                                    links="/phoneDetail"
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    <div className="title-box-product">
-                        <h2>TABLET</h2>
-                        <Link to="/phoneProduct"><button>Xem tất cả</button></Link>
-                    </div>
 
-                    <div className="item-box-tablet-noibat">
-                        <div className="box-banner-noibat">
-                            <img src='./image/BannerPhoneNoibat.jpg' alt="banner sản phẩm" />
-                        </div>
-                        <div className="box-product-noibat">
-                            <ProductSlider
-                                data={productPhone}
-                                links="/phoneDetail"
-                            />
-                        </div>
-                    </div>
+
+
+
                     {/* <div className="title-box-product">
                     <h2>MÁY TÍNH BẢNG</h2>
                     <Link to="/tabletProduct"><button>Xem tất cả</button></Link>

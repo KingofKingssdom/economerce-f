@@ -2,6 +2,8 @@ import "./indexAdmin.css"
 import { IoIosNotifications } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 function HeaderSide() {
+    let username = sessionStorage.getItem('user');
+    let userObj = JSON.parse(username);
     return (
         <>
             <div className="header-sider">
@@ -9,7 +11,7 @@ function HeaderSide() {
                     <IoIosNotifications />
                 </div>
                 <div className="header-sider-right">
-                    <FaUser /> Đức Huy
+                    <FaUser /> {userObj.fullName}
                 </div>
             </div>
         </>
