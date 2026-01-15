@@ -3,36 +3,38 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 function UpdateProduct() {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const { id } = useParams();
     const navigate = useNavigate();
+    const [productCode, setProductCode] = useState("");
     const [productName, setProductName] = useState("");
-    const [pricePrevious, setPricePrevious] = useState("");
-    const [priceCurrent, setPriceCurrent] = useState("");
-    const [discountPercent, setDiscountPercent] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [status, setStatus] = useState("");
-    const [installment, setInstallment] = useState("");
     const [description, setDescription] = useState("");
+    const [quantityProduct, setQuantityProduct] = useState("");
+    const [featured, setFeatured] = useState(false);
+    const [promotional, setPromotional] = useState(false);
+
     const [categoryIds, setCategoryIds] = useState("");
     const [brandIds, setBrandIds] = useState("");
-    const [productImage, setProductImage] = useState(null);
+    const [urlPhoto, setUrlPhoto] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const [message, setMessage] = useState(false);
     const [brands, setBrands] = useState([]);
     const [categories, setCategories] = useState([]);
 
+    console.log(categoryIds)
+    console.log("brandId " + brandIds)
 
     useEffect(() => {
         const fetchCategory = async () => {
-            const response = await axios.get("http://localhost:8080/category/getAll");
-            setCategories(response.data);
+            const response = await axios.get(`${API_BASE_URL}/category/search/all`);
+            setCategories(response.data.data);
         }
         fetchCategory();
     }, [])
     useEffect(() => {
         const fetchBrand = async () => {
-            const response = await axios.get("http://localhost:8080/brand/getAll");
-            setBrands(response.data);
+            const response = await axios.get(`${API_BASE_URL}/brand/search/all`);
+            setBrands(response.data.data);
         }
         fetchBrand();
     }, [])
@@ -50,27 +52,25 @@ function UpdateProduct() {
         }
 
         const formData = new FormData();
+        formData.append("productCode", productCode);
         formData.append("productName", productName);
-        formData.append("pricePrevious", pricePrevious);
-        formData.append("priceCurrent", priceCurrent);
-        formData.append("discountPercent", discountPercent);
-        formData.append("quantity", quantity);
-        formData.append("status", status);
-        formData.append("installment", installment);
+        formData.append("featured", featured);
+        formData.append("promotional", promotional);
+        formData.append("quantityProduct", quantityProduct);
         formData.append("description", description);
+
         formData.append("categoryIds", categoryIds);
         formData.append("brandIds", brandIds);
-        if (productImage) {
-            formData.append("productImage", productImage);
+        if (urlPhoto) {
+            formData.append("urlPhoto", urlPhoto);
         }
 
 
         try {
-            const token = localStorage.getItem('token');
-            const response = await axios.put(`http://localhost:8080/product/update/${id}`, formData, {
+            const response = await axios.put(`${API_BASE_URL}/product/update?productId=${id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    'Authorization': `Bearer ${token}`
+
                 },
             });
             if (response.status === 200 || response.status === 201) {
@@ -80,17 +80,15 @@ function UpdateProduct() {
                     navigate('/admin/listProduct');
                 }, 5000);
                 // Reset form
+                setProductCode("");
                 setProductName("");
-                setPricePrevious("");
-                setPriceCurrent("");
-                setDiscountPercent("");
-                setQuantity("");
-                setStatus("");
-                setInstallment("");
+                setFeatured("");
+                setPromotional("");
+                setQuantityProduct("");
                 setDescription("");
                 setCategoryIds("");
                 setBrandIds("");
-                setProductImage(null);
+                setUrlPhoto(null);
 
             } else {
                 setErrorMessage("Đã có lỗi xảy ra. Vui lòng kiểm tra lại dữ liệu.");
@@ -113,32 +111,21 @@ function UpdateProduct() {
                         <form onSubmit={handleSubmit}>
 
                             <div>
-                                <label htmlFor="discountPercent">Giảm giá:</label>
+                                <label htmlFor="productCode">Mã sản phẩm:</label>
                                 <input
-                                    placeholder='Giảm %'
+                                    placeholder='Mã sản phẩm'
                                     type="text"
-                                    id="discountPercent"
-                                    name="discountPercent"
-                                    value={discountPercent}
-                                    onChange={(e) => setDiscountPercent(e.target.value)}
+                                    id="productCode"
+                                    name="productCode"
+                                    value={productCode}
+                                    onChange={(e) => setProductCode(e.target.value)}
                                     required
                                 />
                             </div>
                             <div>
-                                <label htmlFor="wordDay">Trả góp với lãi xuất:</label>
+                                <label htmlFor="productName">Tên sản phẩm:</label>
                                 <input
-                                    placeholder='lãi xuất %'
-                                    type="text"
-                                    id="installment"
-                                    name="installment"
-                                    value={installment}
-                                    onChange={(e) => setInstallment(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className="full-width">
-                                <label htmlFor="fullName">Tên sản phẩm:</label>
-                                <input
+                                    placeholder='Tên sản phẩm'
                                     type="text"
                                     id="productName"
                                     name="productName"
@@ -147,30 +134,10 @@ function UpdateProduct() {
                                     required
                                 />
                             </div>
-                            <div>
-                                <label htmlFor="dob">Giá trước khi giảm:</label>
-                                <input
-                                    type="number"
-                                    id="pricePrevious"
-                                    name="pricePrevious"
-                                    value={pricePrevious}
-                                    onChange={(e) => setPricePrevious(e.target.value)}
-                                />
-                            </div>
                             <div className="">
-                                <label htmlFor="priceCurrent">Giá bán:</label>
-                                <input
-                                    type="number"
-                                    id="priceCurrent"
-                                    name="priceCurrent"
-                                    value={priceCurrent}
-                                    onChange={(e) => setPriceCurrent(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div>
                                 <label htmlFor="description">Thông tin khuyến mãi:</label>
                                 <input
+                                    placeholder='khuyến mãi'
                                     type="text"
                                     id="description"
                                     name="description"
@@ -180,29 +147,42 @@ function UpdateProduct() {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="quantity">Số lượng nhập hàng:</label>
+                                <label htmlFor="promotional">Sản phẩm khuyễn mãi:</label>
+                                <select id='promotional' name='promotional'
+                                    onChange={(e) => setPromotional(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Chọn</option>
+                                    <option value={true}>Có</option>
+                                    <option value={false}>Không</option>
+
+                                </select>
+                            </div>
+                            <div className="">
+                                <label htmlFor="featured">Sản phẩm nổi bật:</label>
+                                <select id='featured' name='featured'
+                                    onChange={(e) => setFeatured(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Chọn</option>
+                                    <option value={true}>Có</option>
+                                    <option value={false}>Không</option>
+
+                                </select>
+                            </div>
+
+                            <div>
+                                <label htmlFor="quantityProduct">Số lượng nhập hàng:</label>
                                 <input
                                     type="number"
-                                    id="quantity"
-                                    name="quantity"
-                                    value={quantity}
-                                    onChange={(e) => setQuantity(e.target.value)}
+                                    id="quantityProduct"
+                                    name="quantityProduct"
+                                    value={quantityProduct}
+                                    onChange={(e) => setQuantityProduct(e.target.value)}
                                     required
                                 />
                             </div>
-                            <div className="gender-container">
-                                <label htmlFor="status">Trạng thái:</label>
-                                <select
-                                    id="status"
-                                    name="status"
-                                    value={status}
-                                    onChange={(e) => setStatus(e.target.value)}
-                                >
-                                    <option value="">Chọn</option>
-                                    <option value="Còn hàng">Còn hàng</option>
-                                    <option value="Hết hàng">Hết hàng</option>
-                                </select>
-                            </div>
+
                             <div className="">
                                 <label htmlFor="categoryIds">Danh mục sản phẩm:</label>
                                 <select
@@ -233,13 +213,13 @@ function UpdateProduct() {
                                 </select>
                             </div>
                             <div>
-                                <label htmlFor="productImage">Chọn ảnh sản phẩm:</label>
+                                <label htmlFor="urlPhoto">Chọn ảnh sản phẩm:</label>
                                 <input
                                     type="file"
-                                    id="productImage"
-                                    name="productImage"
+                                    id="urlPhoto"
+                                    name="urlPhoto"
                                     accept="image/*"
-                                    onChange={(e) => setProductImage(e.target.files[0])}
+                                    onChange={(e) => setUrlPhoto(e.target.files[0])}
                                 />
                             </div>
 

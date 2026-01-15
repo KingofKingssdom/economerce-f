@@ -95,7 +95,7 @@ function ProductDetail(props) {
                     </div>
                     <div className="wrapper-product">
                         <div className="container-productImage">
-                            <img src={props.data.productColors[selectBoxColor - 1].urlPhoto} alt={props.data.productName} />
+                            <img src={`${IMAGE_BASE_URL}${props.data.productColors[selectBoxColor - 1].urlPhoto}`} alt={props.data.productName} />
                         </div>
                         <div className="container-productDetail-right">
                             <div className="content-price-productDetail">
@@ -160,7 +160,7 @@ function ProductDetail(props) {
                                                     setSelectBoxColor(data.id);
                                                 }}
                                             >
-                                                <img src={`${data.urlPhoto}`} alt="" className="img-color-product-item" />
+                                                <img src={`${IMAGE_BASE_URL}${data.urlPhoto}`} alt="" className="img-color-product-item" />
                                                 {data.titleVariant}
                                             </div>
                                         )
@@ -237,32 +237,33 @@ function ProductDetail(props) {
                                 >X</div>
                             </div>
                             <div className="specification-table-bottom">
-                                <div className="table-bottom">
-                                    {props.data.specifications.map((d) => {
-                                        return (
-                                            <>
-                                                <h6>{d.nameSpecification}</h6>
+                                <div className="specification-table-bottom">
+                                    <div className="table-bottom">
+                                        {props.data.specifications.map((spec) => (
+                                            <div key={spec.id}>
+                                                <h6>{spec.nameSpecification}</h6>
+
                                                 <div className="table-detail">
-                                                    {(d.specificationDetails).map((data2) => {
-                                                        return (
-                                                            <table className="table table-striped">
+                                                    {spec.specificationDetails
+                                                        .filter(
+                                                            (detail) => detail.productId === props.data.id
+                                                        )
+                                                        .map((detail, index) => (
+                                                            <table className="table table-striped" key={index}>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td className="td-title">{data2.labelSpecification}</td>
-                                                                        <td>{data2.valueSpecification}</td>
+                                                                        <td className="td-title">
+                                                                            {detail.labelSpecification}
+                                                                        </td>
+                                                                        <td>{detail.valueSpecification}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
-                                                        )
-
-                                                    })}
+                                                        ))}
                                                 </div>
-                                            </>
-
-
-                                        )
-                                    })}
-
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>

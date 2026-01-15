@@ -11,7 +11,7 @@ function HeaderSide() {
                     <IoIosNotifications />
                 </div>
                 <div className="header-sider-right">
-                    <FaUser /> {userObj.fullName}
+                    <FaUser /> {userObj?.fullName}
                 </div>
             </div>
         </>

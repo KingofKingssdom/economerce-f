@@ -2,7 +2,8 @@ import "./indexAdmin.css"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import React from "react";
+import { FaPen } from "react-icons/fa";
 function ProductDetail() {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
@@ -56,6 +57,7 @@ function ProductDetail() {
                                                         />
                                                     </div>
                                                 </td>
+                                                <td><button className="btn btn-warning"><FaPen /></button></td>
                                             </tr>
                                         ))}
 
@@ -82,6 +84,7 @@ function ProductDetail() {
                                                 <td>{productVariant.storage}</td>
                                                 <td>{productVariant.priceOrigin}</td>
                                                 <td>{productVariant.priceDiscount}</td>
+                                                <td><button className="btn btn-warning"><FaPen /></button></td>
                                             </tr>
                                         ))}
 
@@ -96,23 +99,32 @@ function ProductDetail() {
                                 >
 
                                     <tbody>
-                                        {product?.specifications?.map((spec) => (
-                                            <>
+                                        {product?.specifications?.map((spec) => {
+                                            const filteredDetails = spec.specificationDetails?.filter(
+                                                (detail) => detail.productId === product.id
+                                            );
 
-                                                <tr key={spec.id} className="table-secondary">
-                                                    <td colSpan="3">
-                                                        {spec.nameSpecification}
-                                                    </td>
-                                                </tr>
-                                                {spec.specificationDetails?.map((detail, i) => (
-                                                    <tr key={`${spec.id}-${i}`}>
-                                                        <td>{detail.labelSpecification}</td>
-                                                        <td>{detail.valueSpecification}</td>
-                                                        <td>Chỉnh sửa</td>
+                                            // Không có detail đúng product → không render spec này
+                                            if (!filteredDetails || filteredDetails.length === 0) return null;
+
+                                            return (
+                                                <React.Fragment key={spec.id}>
+                                                    <tr className="table-secondary">
+                                                        <td colSpan="3">
+                                                            {spec.nameSpecification}
+                                                        </td>
                                                     </tr>
-                                                ))}
-                                            </>
-                                        ))}
+
+                                                    {filteredDetails.map((detail, i) => (
+                                                        <tr key={`${spec.id}-${i}`}>
+                                                            <td>{detail.labelSpecification}</td>
+                                                            <td>{detail.valueSpecification}</td>
+                                                            <td><button className="btn btn-warning"><FaPen /></button></td>
+                                                        </tr>
+                                                    ))}
+                                                </React.Fragment>
+                                            );
+                                        })}
 
                                     </tbody>
                                 </table>

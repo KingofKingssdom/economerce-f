@@ -32,14 +32,12 @@ function AddSpecificationDetail() {
                 `${API_BASE_URL}/productSpecification/search?productId=${productId}`
             );
             setProductSpecifications(response.data.data);
-            console.log("Dữ liệu productSpecification " + response.data.data)
         };
 
         fetchProductSpecifications();
     }, [productId]);
 
-
-
+    console.log(productId)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -57,6 +55,7 @@ function AddSpecificationDetail() {
         formData.append("labelSpecification", labelSpecification);
         formData.append("valueSpecification", valueSpecification);
         formData.append("productSpecificationId", selectedSpecificationId);
+        formData.append("productId", productId);
 
 
         try {
