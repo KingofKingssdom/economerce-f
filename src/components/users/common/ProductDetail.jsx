@@ -13,16 +13,16 @@ function ProductDetail(props) {
     const { id } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
-    const variants = props.data.resProductVariantDto;
+    const variants = props.data.productVariants;
     const uniqueStorages = [...new Set(variants.map(v => v.storage))];
     const [selectedStorage, setSelectedStorage] = useState(uniqueStorages[0]);
     const [selectedVariant, setSelectedVariant] = useState(variants[0]);
-    const indexInit = props.data.resProductVariantDto[0].id;
+    const indexInit = props.data.productVariants[0].id;
     const [indexCurrent, setIndexCurrent] = useState(indexInit);
     const [selectBoxColor, setSelectBoxColor] = useState(0);
-    const idProductColor = props.data.resProductVariantDto[selectBoxColor].id;
-    const [priceChange, setPriceChange] = useState(props.data.resProductVariantDto[0].currentPrice);
-    const [priceOrigin, setPriceOrigin] = useState(props.data.resProductVariantDto[0].originPrice);
+    const idProductColor = props.data.productVariants[selectBoxColor].id;
+    const [priceChange, setPriceChange] = useState(props.data.productVariants[0].currentPrice);
+    const [priceOrigin, setPriceOrigin] = useState(props.data.productVariants[0].originPrice);
 
     useEffect(() => {
         getUserCurrent().then((response) => {

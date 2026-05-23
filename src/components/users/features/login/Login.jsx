@@ -17,13 +17,24 @@ function Login() {
     }
     const handleLogin = async (e) => {
         e.preventDefault();
-
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
         try {
-            const user = await postLogin(email, password);
-            setEmail("");
-            setPassword("");
-            sessionStorage.setItem("user", JSON.stringify(user));
-            navigate("/", { state: { user } });
+            const jwtToken = await postLogin(formData);
+            if (jwtToken) {
+
+                localStorage.setItem("accessToken", jwtToken);
+                alert("Đăng nhập  thành công")
+                setEmail("");
+                setPassword("");
+                // sessionStorage.setItem("user", JSON.stringify(user));
+                // navigate("/", { state: { user } });
+                navigate("/")
+            }
+            else {
+                alert("Đăng nhập thất bại: Không nhận được mã xác thực từ máy chủ!");
+            }
         } catch (error) {
             console.error("Lỗi khi đăng nhập:", error);
             alert("Sai tên đăng nhập hoặc mật khẩu vui lòng kiểm tra lại!");
@@ -31,9 +42,13 @@ function Login() {
     };
     const handleRegister = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append("fullName", fullName);
+        formData.append("phoneNumber", phoneNumber);
+        formData.append("email", email);
+        formData.append("password", password);
         try {
-            const register = await postRegister(fullName, phoneNumber, email, password)
-
+            await postRegister(formData)
             alert("Đăng ký thành công!");
             setPhoneNumber("");
             setPassword("");

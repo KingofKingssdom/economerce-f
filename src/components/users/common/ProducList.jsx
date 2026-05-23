@@ -42,9 +42,6 @@ function ProductList(props) {
 
 
     const productShow = (brandId !== 0 ? filterBrand : initialList) || [];
-
-    console.log("Giá trị productShow:", productShow);
-
     const pages = [];
     for (let i = 1; i <= currentPage; i++) {
         pages.push(
@@ -80,10 +77,10 @@ function ProductList(props) {
                                 preLink={props.link}
                                 id={data.id}
                                 discountInfo="Trả góp 0%"
-                                image={data.urlImageProduct}
+                                image={data.urlPhotoProduct}
                                 title={data.productName}
-                                price={data.resProductVariantDto?.[0]?.currentPrice}
-                                discount={data.resProductVariantDto?.[0]?.originPrice}
+                                price={data.productVariants?.[0]?.currentPrice}
+                                discount={data.productVariants?.[0]?.originPrice}
                                 description={data.description}
                             />
                         </div>))) : (

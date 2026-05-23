@@ -23,7 +23,7 @@ function OutStandingProduct() {
     useEffect(() => {
         getProductFeatured(categoryPhone).then(
             (response) => {
-                setProductPhone(response.data.result);
+                setProductPhone(response.data);
             }
         )
 
@@ -31,7 +31,7 @@ function OutStandingProduct() {
     useEffect(() => {
         getProductFeatured(categoryTablet).then(
             (response) => {
-                setProductTablet(response.data.result);
+                setProductTablet(response.data);
             }
         )
 
@@ -39,7 +39,7 @@ function OutStandingProduct() {
     useEffect(() => {
         getProductFeatured(categoryLaptop).then(
             (response) => {
-                setProductLaptop(response.data.result);
+                setProductLaptop(response.data);
             }
         )
 
@@ -47,7 +47,7 @@ function OutStandingProduct() {
     useEffect(() => {
         getProductFeatured(categorySound).then(
             (response) => {
-                setProductSound(response.data.result);
+                setProductSound(response.data);
             }
         )
 
@@ -55,7 +55,7 @@ function OutStandingProduct() {
     useEffect(() => {
         getProductFeatured(categoryWatch).then(
             (response) => {
-                setProductWatch(response.data.result);
+                setProductWatch(response.data);
             }
         )
 
@@ -63,7 +63,7 @@ function OutStandingProduct() {
     useEffect(() => {
         getProductFeatured(categoryScreen).then(
             (response) => {
-                setProductScreen(response.data.result);
+                setProductScreen(response.data);
             }
         )
 
@@ -71,7 +71,7 @@ function OutStandingProduct() {
     useEffect(() => {
         getProductFeatured(categoryTivi).then(
             (response) => {
-                setProductTivi(response.data.result);
+                setProductTivi(response.data);
             }
         )
 

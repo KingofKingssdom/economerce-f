@@ -50,10 +50,31 @@ function Header() {
         setSearchItem(e.target.value);
     }
     useEffect(() => {
-        getUserCurrent().then((response) => {
-            setUser(response);
-        })
-    }, [])
+        const token = localStorage.getItem("accessToken");
+
+        // Nếu chưa đăng nhập (không có token), đá về trang login ngay
+        if (!token) {
+            alert("Vui lòng đăng nhập để xem thông tin cá nhân!");
+            navigate("/login");
+            return;
+        }
+
+        // Nếu có token, tiến hành gọi API lấy profile
+        getUserCurrent()
+            .then((response) => {
+                // response lúc này chính là cục Map.of("id",..., "fullName",...) từ Backend trả về
+                setUser(response);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Lỗi lấy thông tin profile:", error);
+                alert("Không thể tải thông tin profile. Phiên đăng nhập có thể đã hết hạn.");
+                setLoading(false);
+                // Nếu lỗi 403/401, có thể xóa token cũ và bắt đăng nhập lại
+                // localStorage.removeItem("accessToken");
+                // navigate("/login");
+            });
+    }, [navigate]);
 
 
     return (

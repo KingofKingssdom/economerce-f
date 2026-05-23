@@ -6,7 +6,7 @@ function HotSaleProduct() {
   const [dataProduct, setDataProduct] = useState([]);
   useEffect(() => {
     getProductPromotional().then((response) => {
-      setDataProduct(response.data.result);
+      setDataProduct(response.data);
     })
   }, [])
   return (

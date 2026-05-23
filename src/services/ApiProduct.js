@@ -7,13 +7,13 @@ export function getProductAll() {
 }
 
 export function getProductFeatured(categoryId) {
-    return apiFetch(`/product/IsFeatured/${categoryId}`, {
+    return apiFetch(`/product/feature?featured=true&categoryId=${categoryId}`, {
         method: "GET"
 
     })
 }
 export function getProductPromotional() {
-    return apiFetch(`/product/IsOnPromotion`, {
+    return apiFetch(`/product/promotional?promotional=true`, {
         method: "GET"
 
     })
@@ -98,8 +98,8 @@ export function postProductSpecificationDetail(value) {
         body: value
     })
 }
-export function getProductById(value) {
-    return apiFetch(`/product/productId/${value}`, {
+export function getProductById(id) {
+    return apiFetch(`/product/productId/${id}`, {
         method: "GET"
     })
 }
@@ -109,7 +109,7 @@ export function getProductByCategoryId(id) {
     })
 }
 export function getProductByCategoryIdAndBrandId(categoryId, brandId) {
-    return apiFetch(`/product/categoryId/${categoryId}/brandId/${brandId}`, {
+    return apiFetch(`/product/category-brand?categoryId=${categoryId}&brandId=${brandId}`, {
         method: "GET"
     })
 }

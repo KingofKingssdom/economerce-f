@@ -46,10 +46,10 @@ function ProductSlider({ data = [], getLink }) {
                 preLink={link}
                 id={item.id}
                 discountInfo="Trả góp 0%"
-                image={item.urlImageProduct}
+                image={item.urlPhotoProduct}
                 title={item.productName}
-                price={item.resProductVariantDto?.[0]?.originPrice}
-                discount={item.resProductVariantDto?.[0]?.currentPrice}
+                price={item.productVariants?.[0]?.originPrice}
+                discount={item.productVariants?.[0]?.currentPrice}
                 description={item.description}
               />
             </div>
