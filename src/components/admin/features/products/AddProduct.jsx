@@ -51,14 +51,14 @@ function AddProduct() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = new FormData();
-        form.append("ProductCode", productCode);
-        form.append("ProductName", productName);
-        form.append("Description", description);
-        form.append("IsFeatured", featured);
-        form.append("IsOnPromotion", promotional);
-        form.append("CategoryId", categoryId);
-        form.append("BrandId", brandId);
-        form.append("UrlImageProduct", urlPhoto);
+        form.append("productCode", productCode);
+        form.append("productName", productName);
+        form.append("description", description);
+        form.append("featured", featured);
+        form.append("promotional", promotional);
+        form.append("categoryId", categoryId);
+        form.append("brandId", brandId);
+        form.append("urlPhoto", urlPhoto);
         try {
             postProduct(form);
             alert("Thêm sản phẩm thành công");
@@ -67,7 +67,6 @@ function AddProduct() {
             setProductCode("");
             setFeatured("");
             setPromotional("");
-            setQuantityProduct("");
             setDescription("");
             setUrlPhoto("");
         } catch (error) {
@@ -355,7 +354,7 @@ function AddProduct() {
                         </div>
 
                     </div>
-                    <button className='button-add' style={{ width: '40%', marginLeft: '30%' }} onClick={handleSubmit}>Thêm Danh mục</button>
+                    <button className='button-add' style={{ width: '40%', marginLeft: '30%' }} onClick={handleSubmit}>Thêm sản phẩm</button>
                     <p style={{ width: '40%', marginLeft: '35%' }}><b>Vui lòng kiểm tra chính xác thông tin trước khi gửi dữ liệu</b></p>
                 </div>
             </div>

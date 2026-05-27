@@ -1,5 +1,5 @@
 import "../../../../styles/index.css";
-import { getProductAll } from "../../../../services/ApiProduct";
+import { getProductAll, getProductCode } from "../../../../services/ApiProduct";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MdOutlineRemoveRedEye, MdDeleteOutline } from "react-icons/md";
@@ -35,8 +35,8 @@ function ListProduct() {
     }
     const handleSearch = async () => {
         try {
-            await getCategoryByCategoryCode(filterData).then((response) => {
-                setCategories([response.data]);
+            await getProductCode(filterData).then((response) => {
+                setProducts([response.data]);
             })
         }
         catch (error) {
@@ -104,19 +104,19 @@ function ListProduct() {
                                     <tr key={product.id}>
                                         <td style={{ color: "red", fontWeight: "bolder" }}>{product.productCode}</td>
                                         <td>{product.productName}</td>
-                                        <td>{product.resCategory.categoryName}</td>
+                                        <td></td>
                                         <td>
                                             {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-                                                product.resProductVariantDto[0]?.currentPrice)}
+                                                product.productVariants[0]?.currentPrice)}
                                         </td>
-                                        <td>{product.resProductVariantDto[0]?.stock}</td>
+                                        <td>{product.productVariants[0]?.stock}</td>
                                         <td style={{
                                             color:
-                                                product.resProductVariantDto[0]?.stock >= 10 ? 'green' :
-                                                    product.resProductVariantDto[0]?.stock > 0 ? 'yellow' : 'red',
+                                                product.productVariants[0]?.stock >= 10 ? 'green' :
+                                                    product.productVariants[0]?.stock > 0 ? 'blue' : 'red',
                                         }}>
-                                            {product.resProductVariantDto[0]?.stock >= 10 ? "Còn hàng" :
-                                                product.resProductVariantDto[0]?.stock > 0 ? "Sắp hết hàng" : "Hết hàng"}
+                                            {product.productVariants[0]?.stock >= 10 ? "Còn hàng" :
+                                                product.productVariants[0]?.stock > 0 ? "Sắp hết hàng" : "Hết hàng"}
                                         </td>
                                         <td>
                                             <Link to={`/admin/product-variants/id/${product.id}`}>

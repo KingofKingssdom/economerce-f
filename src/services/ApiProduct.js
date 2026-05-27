@@ -12,6 +12,12 @@ export function getProductFeatured(categoryId) {
 
     })
 }
+export function getProductCode(productCode) {
+    return apiFetch(`/product/productCode/${productCode}`, {
+        method: "GET"
+
+    })
+}
 export function getProductPromotional() {
     return apiFetch(`/product/promotional?promotional=true`, {
         method: "GET"
@@ -49,7 +55,7 @@ export function postProductColor(value) {
 
 }
 export function postProductVariant(productId, formData) {
-    return apiFetch(`/product-variants/productId/${productId}`, {
+    return apiFetch(`/productVariant/productId/${productId}`, {
         method: "POST",
         body: formData
     })
@@ -114,7 +120,7 @@ export function getProductByCategoryIdAndBrandId(categoryId, brandId) {
     })
 }
 export function getProductVariantByProductId(productId) {
-    return apiFetch(`/product-variants/productId/${productId}`, {
+    return apiFetch(`/productVariant/product?productId=${productId}`, {
         method: "GET"
     })
 }

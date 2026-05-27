@@ -1,5 +1,5 @@
 import "../../../../styles/index.css"
-import { getBrand } from "../../../../services/ApiBrand";
+import { getBrand, getBrandByBrandCode } from "../../../../services/ApiBrand";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GoPencil } from "react-icons/go";
@@ -11,6 +11,7 @@ import UpdateBrand from "./UpdateBrand";
 function ListBrand() {
     const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
     const [brands, setBrands] = useState([]);
+    const [filterData, setFilterData] = useState("");
     const [displayData, setDisplayData] = useState([]);
     const [showBoxUpdate, setShowBoxUpdate] = useState(false);
     const [idData, setIdData] = useState(0);
@@ -21,6 +22,19 @@ function ListBrand() {
             })
         } catch (error) {
             console.log("Lỗi gọi lấy toàn bộ danh sách sản phẩm " + error);
+        }
+    }
+    const handleFilterData = (e) => {
+        setFilterData(e.target.value);
+    }
+    const handleSearch = async () => {
+        try {
+            await getBrandByBrandCode(filterData).then((response) => {
+                setBrands([response.data]);
+            })
+        }
+        catch (error) {
+            console.log("Lỗi lọc danh mục " + error)
         }
     }
     useEffect(() => {
@@ -49,12 +63,12 @@ function ListBrand() {
                                 Tìm kiếm theo mã nhãn hiệu
                                 <div className="container-search-item-list">
                                     <input
-                                        // value={filterData}
-                                        // onChange={handleFilterData}
+                                        value={filterData}
+                                        onChange={handleFilterData}
                                         placeholder="Nhập mã tìm kiếm ......."
                                     />
                                     <button
-                                    // onClick={handleSearch}
+                                        onClick={handleSearch}
                                     >Tìm</button>
                                 </div>
 
@@ -71,7 +85,7 @@ function ListBrand() {
                         <table class="table-content-list-all">
                             <thead>
                                 <tr>
-                                    <th>STT</th>
+                                    <th>Mã nhãn hàng</th>
                                     <th>Tên nhãn hàng</th>
                                     <th>Ảnh nhãn hàng</th>
                                     <th className="repair-table">Chỉnh sửa</th>
@@ -81,7 +95,7 @@ function ListBrand() {
                             <tbody >
                                 {displayData.map((brand, index) => (
                                     <tr key={brand.id || index}>
-                                        <td>{brand.id}</td>
+                                        <td>{brand.brandCode}</td>
                                         <td>{brand.brandName}</td>
                                         <td><img style={{ maxHeight: '35px' }} src={`${IMAGE_BASE_URL}${brand.urlImageBrand}`} alt="Ảnh nhãn hiệu" /></td>
                                         <td>

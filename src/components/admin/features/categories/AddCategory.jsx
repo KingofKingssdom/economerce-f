@@ -12,8 +12,11 @@ function AddCateogry() {
         setCategoryName(e.target.value)
     }
     const handleSubmit = async () => {
+        const formData = new FormData();
+        formData.append("categoryCode", categoryCode)
+        formData.append("categoryName", categoryName)
         try {
-            const response = await postCategory(categoryCode, categoryName);
+            const response = await postCategory(formData);
             alert("Thêm dữ liệu thành công")
             setCategoryName("");
             setCategoryCode("");

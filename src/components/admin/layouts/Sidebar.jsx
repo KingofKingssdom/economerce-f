@@ -1,5 +1,5 @@
 import "../../../styles/index.css"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaListAlt, FaFolder, FaHome, FaFacebookMessenger, FaFileInvoiceDollar, FaRegListAlt } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
 import { MdCategory, MdOutlineKeyboardArrowDown, MdOutlineBrandingWatermark } from "react-icons/md";
@@ -8,6 +8,7 @@ import { IoMdAdd } from "react-icons/io";
 import { IoEyeSharp, IoSettingsSharp } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
+import { getUserCurrent } from "../../../services/ApiAuth"
 function Sidebar() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -15,6 +16,20 @@ function Sidebar() {
     const [show, setShow] = useState(false);
     const [user, setUser] = useState(null);
     const [showUserMenu, setShowUserMenu] = useState(false);
+    const fetchUser = async () => {
+        try {
+            await getUserCurrent()
+                .then((response) => {
+                    setUser(response);
+                })
+        } catch (error) {
+            console.log("Lỗi gọi api lấy thông tin user " + error)
+        }
+    }
+    useEffect(() => {
+        fetchUser()
+    }, [])
+    console.log("User bên addmin " + user)
     const handleLogout = () => {
         sessionStorage.removeItem("user");
         setUser(null);
@@ -148,21 +163,15 @@ function Sidebar() {
                                 <p
                                     className="name-user"
 
-                                    onClick={() => setShowUserMenu(!showUserMenu)}
+
                                 >
                                     {user.fullName.split(" ").pop()}
                                 </p>
 
-                                {showUserMenu && (
-                                    <div className="user-dropdown">
-                                        <button onClick={handleLogout}>
-                                            Đăng xuất <MdOutlineLogout />
-                                        </button>
-                                    </div>
-                                )}
+
                             </>
                         ) : (
-                            <Link to="/admin/login" className="login-link" onClick={(e) => e.stopPropagation()}>
+                            <Link to="/admin/login" className="login-link">
                                 Đăng nhập
                             </Link>
                         )}

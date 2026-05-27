@@ -25,7 +25,7 @@ function HotSaleProduct() {
 
           <ProductSlider
             getLink={(product) => {
-              const categoryId = product.resCategory?.id;
+              const categoryId = product.categoryId;
               switch (categoryId) {
                 case 1:
                   return "/phoneDetail";

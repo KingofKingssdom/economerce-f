@@ -25,24 +25,9 @@ const UserRouters =
         <>
             <Route path="/" element={<HomePage />} />
             <Route path="/phoneDetail/:id" element={<PhoneProductDetail />} />
-            <Route path="/cart" element={
-                <UserProtectedRoute>
-                    <Cart />
-                </UserProtectedRoute>
-            } />
-
-            <Route path="/order" element={
-                <UserProtectedRoute>
-                    <Order />
-                </UserProtectedRoute>
-            } />
-            <Route path="/orderDetail/:id" element={
-                <UserProtectedRoute>
-                    <OrderDetail />
-                </UserProtectedRoute>
-
-            } />
-
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/order" element={<Order />} />
+            <Route path="/orderDetail/:id" element={<OrderDetail />} />
             <Route path="/payOnline" element={<PayMethod />} />
             <Route path="/pay-result" element={<PayResult />} />
             <Route path="/phoneProduct" element={<PhoneListProduct />} />

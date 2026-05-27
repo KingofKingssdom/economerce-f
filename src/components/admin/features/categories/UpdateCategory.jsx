@@ -15,8 +15,11 @@ function UpdateCateogry(props) {
         setCategoryName(e.target.value)
     }
     const handleSubmit = async () => {
+        const formData = new FormData();
+        formData.append("categoryCode", categoryCode);
+        formData.append("categoryName", categoryName);
         try {
-            const response = await putCategory(categoryId, categoryCode, categoryName);
+            const response = await putCategory(categoryId, formData);
             alert("Cập nhập dữ liệu thành công")
             close();
             setCategoryName("");

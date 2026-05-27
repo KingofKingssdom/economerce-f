@@ -22,7 +22,7 @@ export function postOrder(userId, selectedCartItemIds, paymentMethod, receiverNa
     })
 }
 export function getAllOrderByUserId(userId) {
-    return apiFetch(`/order/${userId}`, {
+    return apiFetch(`/order/user/${userId}`, {
         method: "GET",
     })
 }
@@ -68,8 +68,8 @@ export function getCountOrder() {
         method: "GET",
     })
 }
-export function getTotalPrice(orderStatus) {
-    return apiFetch(`/order/total-prices/${orderStatus}`, {
+export function getTotalPrice() {
+    return apiFetch(`/order/sum-prices/`, {
         method: "GET",
     })
 }

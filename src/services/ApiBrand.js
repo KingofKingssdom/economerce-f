@@ -16,6 +16,11 @@ export function getBrandByCategoryId(id) {
         method: "GET"
     })
 }
+export function getBrandByBrandCode(brandCode) {
+    return apiFetch(`/brand/brandCode/${brandCode}`, {
+        method: "GET"
+    })
+}
 export function putBrand(id, formdata) {
     return apiFetch(`/brand/${id}`, {
         method: "PUT",

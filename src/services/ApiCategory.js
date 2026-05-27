@@ -1,35 +1,23 @@
 import apiFetch from "./ApiClient";
-export function postCategory(categoryCode, categoryName) {
-    return apiFetch("/categories", {
+export function postCategory(formData) {
+    return apiFetch("/category", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            categoryCode: categoryCode,
-            categoryName: categoryName
-        })
+        body: formData
     })
 }
-export function putCategory(id, categoryCode, categoryName) {
-    return apiFetch(`/categories/categoryId/${id}`, {
+export function putCategory(id, formData) {
+    return apiFetch(`/category/${id}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            categoryCode: categoryCode,
-            categoryName: categoryName
-        })
+        body: formData
     })
 }
 export function getCategory() {
-    return apiFetch("/categories", {
+    return apiFetch("/category", {
         method: "GET"
     })
 }
 export function getCategoryByCategoryCode(categoryCode) {
-    return apiFetch(`/categories/categoryCode/${categoryCode}`, {
+    return apiFetch(`/category/categoryCode/${categoryCode}`, {
         method: "GET"
     })
 }

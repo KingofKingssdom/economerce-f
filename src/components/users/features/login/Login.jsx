@@ -21,10 +21,9 @@ function Login() {
         formData.append("email", email);
         formData.append("password", password);
         try {
-            const jwtToken = await postLogin(formData);
-            if (jwtToken) {
-
-                localStorage.setItem("accessToken", jwtToken);
+            const response = await postLogin(formData);
+            if (response) {
+                // localStorage.setItem("accessToken", jwtToken);
                 alert("Đăng nhập  thành công")
                 setEmail("");
                 setPassword("");

@@ -106,7 +106,7 @@ function OutStandingProduct() {
                             <div className="box-product-noibat">
                                 <ProductSlider
                                     data={productPhone}
-                                    links="/phoneDetail"
+                                    getLink={() => { return "/phoneDetail" }}
                                 />
                             </div>
                         </div>
@@ -127,7 +127,7 @@ function OutStandingProduct() {
                             <div className="box-product-noibat">
                                 <ProductSlider
                                     data={productTablet}
-                                    links="/tabletDetail"
+                                    getLink={() => { return "/tabletDetail" }}
                                 />
                             </div>
                         </div>
@@ -148,7 +148,7 @@ function OutStandingProduct() {
                             <div className="box-product-noibat">
                                 <ProductSlider
                                     data={productLaptop}
-                                    links="/laptopDetail"
+                                    getLink={() => { return "/laptopDetail" }}
                                 />
                             </div>
                         </div>
@@ -169,7 +169,7 @@ function OutStandingProduct() {
                             <div className="box-product-noibat">
                                 <ProductSlider
                                     data={productSound}
-                                    links="/soundDetail"
+                                    getLink={() => { return "/soundDetail" }}
                                 />
                             </div>
                         </div>
@@ -190,7 +190,7 @@ function OutStandingProduct() {
                             <div className="box-product-noibat">
                                 <ProductSlider
                                     data={productWatch}
-                                    links="/watchDetail"
+                                    getLink={() => { return "/watchDetail" }}
                                 />
                             </div>
                         </div>
@@ -211,7 +211,7 @@ function OutStandingProduct() {
                             <div className="box-product-noibat">
                                 <ProductSlider
                                     data={productScreen}
-                                    links="/screenDetail"
+                                    getLink={() => { return "/screenDetail" }}
                                 />
                             </div>
                         </div>
@@ -232,7 +232,7 @@ function OutStandingProduct() {
                             <div className="box-product-noibat">
                                 <ProductSlider
                                     data={productTivi}
-                                    links="/tiviDetail"
+                                    getLink={() => { return "/tiviDetail" }}
                                 />
                             </div>
                         </div>
