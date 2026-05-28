@@ -35,22 +35,22 @@ function AddProductVariant() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = new FormData();
-        form.append("Storage", storage);
-        form.append("OriginPrice", priceOrigin);
-        form.append("CurrentPrice", priceCurrent);
-        form.append("UrlProductColor", urlPhoto);
-        form.append("ColorName", colorName);
-        form.append("Stock", stock)
+        form.append("storage", storage);
+        form.append("originPrice", priceOrigin);
+        form.append("currentPrice", priceCurrent);
+        form.append("urlProductColor", urlPhoto);
+        form.append("colorName", colorName);
+        form.append("stock", stock)
+        form.append("productId", productId)
         try {
-            postProductVariant(productId, form);
+            postProductVariant(form);
             alert("Thêm phiên bản sản phẩm thành công ");
             setStorage("");
             setStock(0);
             setColorName("");
             setUrlPhoto("");
             setPriceOrigin("");
-            setPriceDiscount("");
-            setProductId("");
+            setPriceCurrent("");
         } catch (error) {
             alert("Thêm phiên bản sản phẩm thất bại ");
             console.log("Lỗi thêm phiên bản sản phẩm " + error);

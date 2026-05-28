@@ -112,7 +112,8 @@ function ListOrder() {
                                 {displayData.map((order) => (
 
                                     <tr key={order.id}>
-                                        <td style={{ color: "red", fontWeight: "bolder" }}>{order.orderCode.slice(0, 7)}</td>
+                                        <td>{order.id}</td>
+                                        {/* <td style={{ color: "red", fontWeight: "bolder" }}>{order.orderCode.slice(0, 7)}</td> */}
                                         <td>{order.receiverName}</td>
                                         <td>{order.dayCreate.replace('T', ' ').split('.')[0]}</td>
                                         <td>

@@ -107,7 +107,7 @@ function Sidebar() {
                             onClick={
                                 () => {
                                     // tonggleBrand();
-                                    setActiveDropdown("brand");
+                                    setActiveDropdown("product");
                                 }}
                         >
                             <Link to="/admin/listProduct" className='content-item'>

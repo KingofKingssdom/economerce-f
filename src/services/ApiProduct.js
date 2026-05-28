@@ -54,8 +54,8 @@ export function postProductColor(value) {
     })
 
 }
-export function postProductVariant(productId, formData) {
-    return apiFetch(`/productVariant/productId/${productId}`, {
+export function postProductVariant(formData) {
+    return apiFetch(`/productVariant`, {
         method: "POST",
         body: formData
     })

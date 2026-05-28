@@ -17,9 +17,11 @@ function Login() {
     }
     const handleLogin = async (e) => {
         e.preventDefault();
-
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
         try {
-            const user = await postLogin(email, password);
+            const user = await postLogin(formData);
             setEmail("");
             setPassword("");
             sessionStorage.setItem("user", JSON.stringify(user));
@@ -31,9 +33,13 @@ function Login() {
     };
     const handleRegister = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append("fullName", fullName);
+        formData.append("phoneNumber", phoneNumber);
+        formData.append("email", email);
+        formData.append("password", password);
         try {
-            const register = await postRegisterAdmin(fullName, phoneNumber, email, password)
-
+            const register = await postRegisterAdmin(formData)
             alert("Đăng ký thành công!");
             setPhoneNumber("");
             setPassword("");

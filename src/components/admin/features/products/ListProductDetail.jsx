@@ -21,7 +21,7 @@ function ListProductDetail() {
     const fetchProductVariant = async () => {
         try {
             await getProductVariantByProductId(id).then((response) => {
-                setProductVariants(response.data.result)
+                setProductVariants(response.data)
             })
         } catch (error) {
             console.log("Lỗi lấy sản phẩm theo id " + error)

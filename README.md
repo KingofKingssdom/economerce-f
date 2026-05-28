@@ -18,3 +18,7 @@
 2️⃣ Chạy dự án           : npm run dev
 3️⃣ chạy mặc định tại    : http://localhost:5173/
 
+Tài khoản Test
+Admin
+email: vanan@gmail.com
+password: 123

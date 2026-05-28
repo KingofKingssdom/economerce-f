@@ -4,9 +4,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Product from "./Product";
 function ProductSlider({ data = [], getLink }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Bạn có thể chỉnh số này cố định hoặc truyền từ ngoài vào làm props
-  const itemsToShow = 4;
+  const itemsToShow = 5;
 
   const changeLeft = () => {
 
@@ -22,12 +20,7 @@ function ProductSlider({ data = [], getLink }) {
     <div className="container-box" style={{ overflow: "hidden", width: "100%" }}>
       <div
         className="slider-box-product"
-        style={{
-          display: "flex",
-          flexWrap: "nowrap",
-          transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`,
-          transition: "transform 0.5s ease-out",
-        }}
+        style={{ '--current-index': currentIndex }}
       >
         {data.map((item) => {
           const link = getLink ? getLink(item) : "/productDetail";
@@ -35,12 +28,7 @@ function ProductSlider({ data = [], getLink }) {
             <div
               key={item.id}
               className="product-item-wrapper"
-              style={{
 
-                flex: `0 0 ${100 / itemsToShow}%`,
-                boxSizing: "border-box",
-                padding: "0 10px"
-              }}
             >
               <Product
                 preLink={link}
